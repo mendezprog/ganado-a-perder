@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://i1kxqam4rxlk"]
+[gd_scene load_steps=5 format=3 uid="uid://i1kxqam4rxlk"]
 
 [ext_resource type="Texture2D" uid="uid://ov5ms2e22veg" path="res://Graficos/bg.png" id="1_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://lmjmmvqk0t6f" path="res://Scenes/player.tscn" id="2_6phgx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5f4k"]
+size = Vector2(62, 647)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
+size = Vector2(1158, 20)
+
 [node name="Level" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 1
 position = Vector2(577, 323.5)
 scale = Vector2(1, 1.118)
 texture = ExtResource("1_k5f4k")
@@ -13,3 +21,31 @@ texture = ExtResource("1_k5f4k")
 [node name="Player" parent="." instance=ExtResource("2_6phgx")]
 position = Vector2(100, 549)
 scale = Vector2(0.5, 0.5)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="right" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/right"]
+position = Vector2(1183, 325)
+shape = SubResource("RectangleShape2D_k5f4k")
+
+[node name="left" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/left"]
+position = Vector2(-31, 325)
+shape = SubResource("RectangleShape2D_k5f4k")
+
+[node name="top" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/top"]
+position = Vector2(577, -11)
+shape = SubResource("RectangleShape2D_6phgx")
+
+[node name="bottom" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/bottom"]
+position = Vector2(575, 658)
+shape = SubResource("RectangleShape2D_6phgx")
+
+[node name="PlayerBullets" type="Node2D" parent="."]
