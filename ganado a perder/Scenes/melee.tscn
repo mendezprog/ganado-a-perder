@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpptf6liina8c"]
+
+[ext_resource type="Script" uid="uid://cmppfyeyk1kno" path="res://Scenes/Scripts/melee.gd" id="1_cc3h0"]
+[ext_resource type="Texture2D" uid="uid://oj1ggqlglr" path="res://Graficos/facon.png" id="2_a6jp7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cngjr"]
+size = Vector2(128, 16)
+
+[node name="Melee" type="Area2D"]
+script = ExtResource("1_cc3h0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_a6jp7")
+centered = false
+offset = Vector2(-8, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cngjr")
