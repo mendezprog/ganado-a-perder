@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://lmjmmvqk0t6f"]
+[gd_scene load_steps=6 format=3 uid="uid://lmjmmvqk0t6f"]
 
 [ext_resource type="Script" uid="uid://c42ejb6f4vueh" path="res://Scenes/Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://kjwg6vxu6jlo" path="res://Graficos/ship.png" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://dpptf6liina8c" path="res://Scenes/melee.tscn" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://dhhjdc61iowd2" path="res://Scenes/Scripts/weapons_pivot.gd" id="3_vgqql"]
+[ext_resource type="PackedScene" uid="uid://bvgepj7vfbpy6" path="res://Scenes/boleadora.tscn" id="5_fkybt"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cvnsp")
@@ -21,3 +22,5 @@ script = ExtResource("3_vgqql")
 position = Vector2(128, 0)
 
 [node name="trabuco" type="Node2D" parent="WeaponsPivot"]
+
+[node name="boleadora" parent="WeaponsPivot" instance=ExtResource("5_fkybt")]

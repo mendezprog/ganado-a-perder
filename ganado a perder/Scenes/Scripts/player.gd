@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+enum WeaponType { MELEE, GUN, BOLEADORAS }
+var current_weapon : WeaponType = WeaponType.MELEE
+
+@onready var melee = $WeaponsPivot/Melee
+@onready var gun = $WeaponsPivot/trabuco
+@onready var boleadora_scene = preload("res://Scenes/boleadora.tscn")
+
 @export var speed: int = 250
 @export var roll_speed: int = 600
 @export var roll_duration: float = 0.3
@@ -40,8 +47,22 @@ func _process(delta: float) -> void:
 			var input_direction = Input.get_vector("left", "right", "up", "down")
 			if input_direction != Vector2.ZERO:
 				roll(input_direction)
+				
+	if Input.is_action_just_pressed("1"):
+		select_weapon(WeaponType.MELEE)
+	elif Input.is_action_just_pressed("2"):
+		select_weapon(WeaponType.GUN)
+	elif Input.is_action_just_pressed("3"):
+		select_weapon(WeaponType.BOLEADORAS)
+		
 	if Input.is_action_just_pressed("leftClick"):
-		shoot()
+		match current_weapon:
+			WeaponType.MELEE:
+				melee.start_swing()
+			WeaponType.GUN:
+				shoot()
+			WeaponType.BOLEADORAS:
+				launch_boleadora()
 
 func movement() -> void:
 	var direction = Input.get_vector("left", "right", "up", "down")
@@ -79,3 +100,19 @@ func shoot():
 	# Start cooldown *after* shooting
 	await get_tree().create_timer(shoot_cooldown).timeout
 	can_shoot = true
+	
+func launch_boleadora():
+	var boleadora = boleadora_scene.instantiate()
+	boleadora.global_position = $WeaponsPivot.global_position
+	
+	var mouse_position = get_global_mouse_position()
+	var direction = (mouse_position - boleadora.global_position).normalized()
+	boleadora.direction = direction
+	
+	get_tree().current_scene.add_child(boleadora)
+	
+func select_weapon(weapon: WeaponType):
+	current_weapon = weapon
+	melee.visible = (weapon == WeaponType.MELEE)
+	$WeaponsPivot/trabuco.visible = (weapon == WeaponType.GUN)
+	# Las boleadoras no tienen un sprite en el jugador, así que no se cambia nada más
