@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://i1kxqam4rxlk"]
+[gd_scene load_steps=6 format=3 uid="uid://i1kxqam4rxlk"]
 
-[ext_resource type="Texture2D" uid="uid://ov5ms2e22veg" path="res://Graficos/bg.png" id="1_k5f4k"]
-[ext_resource type="PackedScene" uid="uid://lmjmmvqk0t6f" path="res://Scenes/player.tscn" id="2_6phgx"]
+[ext_resource type="Script" uid="uid://b21kglw63du3e" path="res://Scenes/Scripts/main.gd" id="1_8gbba"]
+[ext_resource type="Texture2D" uid="uid://bju6yanpxlkke" path="res://Graficos/background.png" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://lmjmmvqk0t6f" path="res://Scenes/player.tscn" id="3_kry3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5f4k"]
 size = Vector2(62, 647)
@@ -9,17 +10,18 @@ size = Vector2(62, 647)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
 size = Vector2(1158, 20)
 
-[node name="Level" type="Node2D"]
+[node name="Main" type="Node2D"]
+script = ExtResource("1_8gbba")
 
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 2
 texture_repeat = 1
-position = Vector2(577, 323.5)
 scale = Vector2(1, 1.118)
-texture = ExtResource("1_k5f4k")
+texture = ExtResource("1_bo1nx")
+offset = Vector2(287.5, 167)
 
-[node name="Player" parent="." instance=ExtResource("2_6phgx")]
-position = Vector2(100, 549)
+[node name="Player" parent="." instance=ExtResource("3_kry3j")]
+position = Vector2(288, 182)
 scale = Vector2(0.5, 0.5)
 
 [node name="Borders" type="Node2D" parent="."]
@@ -27,7 +29,7 @@ scale = Vector2(0.5, 0.5)
 [node name="right" type="StaticBody2D" parent="Borders"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/right"]
-position = Vector2(1183, 325)
+position = Vector2(606, 304)
 shape = SubResource("RectangleShape2D_k5f4k")
 
 [node name="left" type="StaticBody2D" parent="Borders"]
@@ -45,7 +47,7 @@ shape = SubResource("RectangleShape2D_6phgx")
 [node name="bottom" type="StaticBody2D" parent="Borders"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/bottom"]
-position = Vector2(575, 658)
+position = Vector2(580, 384)
 shape = SubResource("RectangleShape2D_6phgx")
 
 [node name="PlayerBullets" type="Node2D" parent="."]

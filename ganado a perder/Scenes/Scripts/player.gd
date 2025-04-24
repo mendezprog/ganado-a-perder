@@ -6,11 +6,12 @@ var current_weapon : WeaponType = WeaponType.MELEE
 @onready var melee = $WeaponsPivot/Melee
 @onready var gun = $WeaponsPivot/trabuco
 @onready var boleadora_scene = preload("res://Scenes/boleadora.tscn")
+@onready var _animated_sprite = $IdleMartin
 
-@export var speed: int = 250
-@export var roll_speed: int = 600
-@export var roll_duration: float = 0.3
-@export var roll_cooldown: float = 0.3
+@export var speed: int = 150
+@export var roll_speed: int = 400
+@export var roll_duration: float = 0.1
+@export var roll_cooldown: float = 0.1
 @export var bullet_scene: PackedScene = load("res://Scenes/bullet.tscn")
 @export var spread_angle_deg: float = 45.0
 @export var pellet_count: int = 5
@@ -21,12 +22,14 @@ var roll_timer = 0.0
 var cooldown_timer = 0.0
 var can_shoot = true
 @export var shoot_cooldown: float = 10.0
+var last_direction: Vector2 = Vector2.DOWN  # Por defecto mirando hacia abajo
 
 func _ready() -> void:
-	position = Vector2(100, 500)
-
+	position = Vector2(240, 160)
+	$player_camera.make_current()
 func _process(delta: float) -> void:
 	# Cooldown management
+	
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
 
@@ -41,7 +44,6 @@ func _process(delta: float) -> void:
 			cooldown_timer = roll_cooldown
 	else:
 		movement()
-		
 		# Trigger roll
 		if Input.is_action_just_pressed("rightClick") and cooldown_timer <= 0:
 			var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -69,6 +71,14 @@ func movement() -> void:
 	velocity = direction * speed
 	move_and_slide()
 
+	if direction != Vector2.ZERO:
+		last_direction = direction
+		update_animation(direction)
+	else:
+		update_animation(last_direction)
+
+	
+
 func roll(direction: Vector2) -> void:
 	is_rolling = true
 	roll_direction = direction.normalized()
@@ -77,7 +87,7 @@ func roll(direction: Vector2) -> void:
 func shoot():
 	if not can_shoot:
 		return
-
+	
 	can_shoot = false  # Block future shots right away
 	
 	var mouse_pos = get_global_mouse_position()
@@ -116,3 +126,14 @@ func select_weapon(weapon: WeaponType):
 	melee.visible = (weapon == WeaponType.MELEE)
 	$WeaponsPivot/trabuco.visible = (weapon == WeaponType.GUN)
 	# Las boleadoras no tienen un sprite en el jugador, así que no se cambia nada más
+
+func update_animation(direction: Vector2) -> void:
+	if abs(direction.x) > abs(direction.y):
+		_animated_sprite.play("IdleDerecha")  # Usamos la misma animación
+		_animated_sprite.flip_h = direction.x < 0  # Si va a la izquierda, se voltea
+	else:
+		_animated_sprite.flip_h = false  # En vertical no queremos flip
+		if direction.y > 0:
+			_animated_sprite.play("IdleFrente")
+		else:
+			_animated_sprite.play("IdleArriba")
