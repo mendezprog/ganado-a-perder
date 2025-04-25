@@ -71,11 +71,10 @@ func movement() -> void:
 	velocity = direction * speed
 	move_and_slide()
 
-	if direction != Vector2.ZERO:
+	var is_moving = direction != Vector2.ZERO
+	if is_moving:
 		last_direction = direction
-		update_animation(direction)
-	else:
-		update_animation(last_direction)
+	update_animation(last_direction, is_moving)
 
 	
 
@@ -114,12 +113,17 @@ func shoot():
 func launch_boleadora():
 	var boleadora = boleadora_scene.instantiate()
 	boleadora.global_position = $WeaponsPivot.global_position
-	
+
 	var mouse_position = get_global_mouse_position()
 	var direction = (mouse_position - boleadora.global_position).normalized()
 	boleadora.direction = direction
-	
-	get_tree().current_scene.add_child(boleadora)
+
+	var bullet_container = $"../PlayerBullets"
+	if bullet_container:
+		bullet_container.add_child(boleadora)
+	else:
+		print("PlayerBullets node not found!")
+
 	
 func select_weapon(weapon: WeaponType):
 	current_weapon = weapon
@@ -127,13 +131,28 @@ func select_weapon(weapon: WeaponType):
 	$WeaponsPivot/trabuco.visible = (weapon == WeaponType.GUN)
 	# Las boleadoras no tienen un sprite en el jugador, así que no se cambia nada más
 
-func update_animation(direction: Vector2) -> void:
-	if abs(direction.x) > abs(direction.y):
-		_animated_sprite.play("IdleDerecha")  # Usamos la misma animación
-		_animated_sprite.flip_h = direction.x < 0  # Si va a la izquierda, se voltea
-	else:
-		_animated_sprite.flip_h = false  # En vertical no queremos flip
-		if direction.y > 0:
-			_animated_sprite.play("IdleFrente")
+func update_animation(direction: Vector2, is_moving: bool) -> void:
+	var x = direction.x
+	var y = direction.y
+
+	#  Primero chequeamos si es diagonal
+	if abs(x) > 0.1 and abs(y) > 0.1:
+		if y < 0:
+			_animated_sprite.play("runningDiagonalUp" if is_moving else "IdleArriba")
 		else:
-			_animated_sprite.play("IdleArriba")
+			_animated_sprite.play("runningDiagonalDown" if is_moving else "IdleFrente")
+		_animated_sprite.flip_h = x < 0
+		return
+
+	#  Luego horizontal puro
+	if abs(x) > abs(y) and abs(y) < 0.2:
+		_animated_sprite.play("runningHorizontal" if is_moving else "IdleDerecha")
+		_animated_sprite.flip_h = x < 0
+		return
+
+	#  Finalmente vertical
+	if y < 0:
+		_animated_sprite.play("runningArriba" if is_moving else "IdleArriba")
+	elif y > 0:
+		_animated_sprite.play("runningAbajo" if is_moving else "IdleFrente")
+	_animated_sprite.flip_h = false

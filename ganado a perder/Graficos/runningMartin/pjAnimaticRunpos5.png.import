@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl1gwux1oe40y"
-path="res://.godot/imported/pjAnimaticRunpos2.png-66d40926d3b3692109506ce03675aca2.ctex"
+uid="uid://dmiklee73d4wu"
+path="res://.godot/imported/pjAnimaticRunpos5.png-6f531cc486f0036cdea4bb6c43b93073.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graficos/pjAnimaticRunpos2.png"
-dest_files=["res://.godot/imported/pjAnimaticRunpos2.png-66d40926d3b3692109506ce03675aca2.ctex"]
+source_file="res://Graficos/runningMartin/pjAnimaticRunpos5.png"
+dest_files=["res://.godot/imported/pjAnimaticRunpos5.png-6f531cc486f0036cdea4bb6c43b93073.ctex"]
 
 [params]
 

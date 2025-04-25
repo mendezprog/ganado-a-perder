@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://dran432fkim8a"]
+
+[ext_resource type="Script" uid="uid://6g30mu0wl2jd" path="res://Scenes/Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://bior2wtnj1ge5" path="res://Graficos/logo.jpg" id="2_48xlc"]
+[ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="3_1ehe0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
+font = ExtResource("3_1ehe0")
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_28flt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(73, 33)
+zoom = Vector2(4, 4)
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(68, 20)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_48xlc")
+
+[node name="text" type="Label" parent="."]
+offset_left = -32.0
+offset_top = 96.0
+offset_right = 176.0
+offset_bottom = 119.0
+text = "Presiona ENTER para empezar"
+label_settings = SubResource("LabelSettings_ce3w2")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -60.0
+offset_top = -55.0
+offset_right = -1.0
+offset_bottom = -16.0
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 16
+text = "Move:
+WASD
+
+Aim:
+move
+mouse"
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="Label"]
+process_mode = 3
+texture_filter = 1
+layout_mode = 0
+offset_left = 206.0
+offset_top = 2.0
+offset_right = 265.0
+offset_bottom = 155.0
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 16
+text = "Change weapon:
+1,2
+shoot:
+m1
+dodge:m2"
+autowrap_mode = 2

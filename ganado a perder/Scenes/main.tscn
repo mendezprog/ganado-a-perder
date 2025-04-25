@@ -51,3 +51,5 @@ position = Vector2(580, 384)
 shape = SubResource("RectangleShape2D_6phgx")
 
 [node name="PlayerBullets" type="Node2D" parent="."]
+
+[node name="EnemyBullets" type="Node2D" parent="."]

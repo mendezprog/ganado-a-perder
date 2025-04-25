@@ -11,15 +11,22 @@ config_version=5
 [application]
 
 config/name="GanadoAPerder"
-run/main_scene="uid://i1kxqam4rxlk"
+run/main_scene="uid://dran432fkim8a"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+run/max_fps=60
+config/icon="uid://bior2wtnj1ge5"
 
 [display]
 
-window/size/viewport_width=1280
+window/size/viewport_width=1080
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
+
+[global_group]
+
+enemies=""
+Player=""
 
 [input]
 
