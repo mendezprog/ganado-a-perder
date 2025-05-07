@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://i1kxqam4rxlk"]
+[gd_scene load_steps=9 format=3 uid="uid://i1kxqam4rxlk"]
 
 [ext_resource type="Script" uid="uid://b21kglw63du3e" path="res://Scenes/Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="Texture2D" uid="uid://bju6yanpxlkke" path="res://Graficos/background.png" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://lmjmmvqk0t6f" path="res://Scenes/player.tscn" id="3_kry3j"]
+[ext_resource type="Texture2D" uid="uid://dxuoy612edcgl" path="res://Graficos/GUI/emptyHealth.png" id="4_kry3j"]
+[ext_resource type="Texture2D" uid="uid://bosjkxa1tp8hf" path="res://Graficos/GUI/FullHealth.png" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://b7364dxm8lqtf" path="res://Scenes/enemy.tscn" id="6_21xkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5f4k"]
 size = Vector2(62, 647)
@@ -23,6 +26,27 @@ offset = Vector2(287.5, 167)
 [node name="Player" parent="." instance=ExtResource("3_kry3j")]
 position = Vector2(288, 182)
 scale = Vector2(0.5, 0.5)
+
+[node name="GUI" type="CanvasLayer" parent="Player"]
+
+[node name="HealthBarContainer" type="Control" parent="Player/GUI"]
+clip_contents = true
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = 153.0
+offset_top = 92.0
+offset_right = 423.0
+offset_bottom = 272.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Player/GUI/HealthBarContainer"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = 17.0
+texture_under = ExtResource("4_kry3j")
+texture_progress = ExtResource("5_21xkr")
 
 [node name="Borders" type="Node2D" parent="."]
 
@@ -53,3 +77,6 @@ shape = SubResource("RectangleShape2D_6phgx")
 [node name="PlayerBullets" type="Node2D" parent="."]
 
 [node name="EnemyBullets" type="Node2D" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource("6_21xkr")]
+position = Vector2(86, 134)

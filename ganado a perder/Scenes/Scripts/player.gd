@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 enum WeaponType { MELEE, GUN, BOLEADORAS }
 var current_weapon : WeaponType = WeaponType.MELEE
+var max_health = 100
+var current_health = max_health
+@onready var health_bar = $GUI/HealthBarContainer/HealthBar # Ajusta la ruta si es diferente
 
 @onready var melee = $WeaponsPivot/Melee
 @onready var gun = $WeaponsPivot/trabuco
@@ -21,10 +24,12 @@ var roll_direction = Vector2.ZERO
 var roll_timer = 0.0
 var cooldown_timer = 0.0
 var can_shoot = true
-@export var shoot_cooldown: float = 10.0
+@export var shoot_cooldown: float = 2.0
 var last_direction: Vector2 = Vector2.DOWN  # Por defecto mirando hacia abajo
 
 func _ready() -> void:
+	health_bar.max_value = max_health
+	health_bar.value = current_health
 	position = Vector2(240, 160)
 	$player_camera.make_current()
 func _process(delta: float) -> void:
@@ -130,6 +135,19 @@ func select_weapon(weapon: WeaponType):
 	melee.visible = (weapon == WeaponType.MELEE)
 	$WeaponsPivot/trabuco.visible = (weapon == WeaponType.GUN)
 	# Las boleadoras no tienen un sprite en el jugador, así que no se cambia nada más
+	
+func take_damage(amount):
+	current_health -= amount
+	if current_health < 0:
+		current_health = 0
+		position = Vector2(240, 160)
+	health_bar.value = current_health
+	
+func heal(amount):
+	current_health += amount
+	if current_health > max_health:
+		current_health = max_health
+	health_bar.value = current_health
 
 func update_animation(direction: Vector2, is_moving: bool) -> void:
 	var x = direction.x

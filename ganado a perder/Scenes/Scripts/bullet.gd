@@ -17,7 +17,7 @@ func _process(delta):
 		queue_free()
 
 func _on_area_entered(area: Area2D):
-	if is_friendly and area.name == "Enemy":
+	if is_friendly and area.name == "enemies":
 		queue_free()
 	elif not is_friendly and area.name == "Player":
 		queue_free()
