@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i1kxqam4rxlk"]
+[gd_scene load_steps=11 format=3 uid="uid://i1kxqam4rxlk"]
 
 [ext_resource type="Script" uid="uid://b21kglw63du3e" path="res://Scenes/Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="Texture2D" uid="uid://bju6yanpxlkke" path="res://Graficos/background.png" id="1_bo1nx"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dxuoy612edcgl" path="res://Graficos/GUI/emptyHealth.png" id="4_kry3j"]
 [ext_resource type="Texture2D" uid="uid://bosjkxa1tp8hf" path="res://Graficos/GUI/FullHealth.png" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://b7364dxm8lqtf" path="res://Scenes/enemy.tscn" id="6_21xkr"]
+[ext_resource type="AudioStream" uid="uid://de1frus1artvu" path="res://SFX/659461__trabuco.wav" id="7_6bp64"]
+[ext_resource type="AudioStream" uid="uid://b63g2ikxavgch" path="res://SFX/Banda Lirio - El Gato Montés 🐱🐱  _ INSTRUMENTAL.mp3" id="8_344ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5f4k"]
 size = Vector2(62, 647)
@@ -80,3 +82,11 @@ shape = SubResource("RectangleShape2D_6phgx")
 
 [node name="Enemy" parent="." instance=ExtResource("6_21xkr")]
 position = Vector2(86, 134)
+
+[node name="TrabucoShoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6bp64")
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_344ge")
+volume_db = -10.0
+parameters/looping = true

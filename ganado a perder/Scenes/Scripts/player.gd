@@ -81,8 +81,6 @@ func movement() -> void:
 		last_direction = direction
 	update_animation(last_direction, is_moving)
 
-	
-
 func roll(direction: Vector2) -> void:
 	is_rolling = true
 	roll_direction = direction.normalized()
@@ -93,7 +91,7 @@ func shoot():
 		return
 	
 	can_shoot = false  # Block future shots right away
-	
+	$"../TrabucoShoot".play()
 	var mouse_pos = get_global_mouse_position()
 	var base_direction = (mouse_pos - global_position).normalized()
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dran432fkim8a"]
+[gd_scene load_steps=6 format=3 uid="uid://dran432fkim8a"]
 
 [ext_resource type="Script" uid="uid://6g30mu0wl2jd" path="res://Scenes/Scripts/main_menu.gd" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://bior2wtnj1ge5" path="res://Graficos/logo.jpg" id="2_48xlc"]
 [ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="3_1ehe0"]
+[ext_resource type="AudioStream" uid="uid://b85jjn4f046t2" path="res://SFX/1. Ariel Ramirez - Balada Para Martín Fierro.mp3" id="4_ce3w2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ce3w2"]
 font = ExtResource("3_1ehe0")
@@ -59,3 +60,6 @@ shoot:
 m1
 dodge:m2"
 autowrap_mode = 2
+
+[node name="IntroMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ce3w2")
