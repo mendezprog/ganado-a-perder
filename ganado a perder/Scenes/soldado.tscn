@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxrnnhbnoi4p1"]
+
+[ext_resource type="Script" uid="uid://dir25mh74a3hw" path="res://script/soldado.gd" id="1_bi6p6"]
+[ext_resource type="Texture2D" uid="uid://vpb1uap4ilx7" path="res://Graficos/Soldado/idle/soldado_idle_frente.png" id="1_kvh3u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi6p6"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(0, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2u3q"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(280, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8awo0"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(0, 280, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g3c1"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(280, 280, 280, 280)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pdrry"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi6p6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2u3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8awo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g3c1")
+}],
+"loop": true,
+"name": &"soldado-idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ii8kf"]
+radius = 60.0
+height = 270.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvh3u"]
+radius = 60.0
+height = 266.667
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bi6p6"]
+radius = 4106.67
+
+[node name="Soldado" type="CharacterBody2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_bi6p6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pdrry")
+animation = &"soldado-idle"
+frame = 3
+frame_progress = 0.234429
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ii8kf")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CapsuleShape2D_kvh3u")
+
+[node name="Detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource("CircleShape2D_bi6p6")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]

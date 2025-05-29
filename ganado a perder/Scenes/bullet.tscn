@@ -1,21 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckfd03g4qeqhh"]
+[gd_scene load_steps=4 format=3 uid="uid://btt0uh7tlv7fn"]
 
-[ext_resource type="Script" uid="uid://dkfpkousoeqd" path="res://Scenes/Scripts/bullet.gd" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://c3qgqkunxdebp" path="res://Graficos/bullet.png" id="2_ycag2"]
+[ext_resource type="Texture2D" uid="uid://c3qgqkunxdebp" path="res://Graficos/Misc/bullet.png" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://hpkiiu0skcd2" path="res://script/bullet.gd" id="1_y25gk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6afsh"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_y25gk"]
+radius = 8.06226
 
 [node name="Bullet" type="Area2D"]
-scale = Vector2(0.5, 0.5)
-script = ExtResource("1_oduel")
-lifetime = 0.7
+script = ExtResource("1_y25gk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_ycag2")
+modulate = Color(0.983333, 1, 0, 1)
+texture = ExtResource("1_mkf8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6afsh")
+shape = SubResource("CircleShape2D_y25gk")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(1.19209e-07, 1.19209e-07)
+scale = Vector2(0.425, 0.425)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
