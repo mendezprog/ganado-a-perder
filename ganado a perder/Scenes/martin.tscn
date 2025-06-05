@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://c84wqmnh8og6s"]
+[gd_scene load_steps=147 format=3 uid="uid://c84wqmnh8og6s"]
 
 [ext_resource type="Script" uid="uid://bnricssdsl3g1" path="res://script/martin.gd" id="1_1aols"]
 [ext_resource type="Texture2D" uid="uid://b8h7fco1al07x" path="res://Graficos/martin/Rolling/pjROLLpos2.png" id="1_oenco"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://di074lutr17sv" path="res://Graficos/martin/Trabuco/trabucoRecarga.png" id="14_m45tx"]
 [ext_resource type="Texture2D" uid="uid://55v35wi1knr3" path="res://Graficos/martin/Trabuco/trabucoDisp.png" id="15_pg1o7"]
 [ext_resource type="Texture2D" uid="uid://crkj5opiiqovx" path="res://Graficos/martin/facon/facon.png" id="18_c4gyv"]
+[ext_resource type="Script" uid="uid://bqtua61s2kbi4" path="res://script/melee.gd" id="18_hxumx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjetr"]
 atlas = ExtResource("2_1aols")
@@ -979,10 +980,9 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8vmuu"]
-radius = 8.0
-height = 28.0
+radius = 9.0
 
-[node name="Martin" type="CharacterBody2D"]
+[node name="Martin" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_1aols")
 
 [node name="martinSprite" type="AnimatedSprite2D" parent="."]
@@ -1004,7 +1004,8 @@ animation = &"trabuco-reload"
 frame = 15
 frame_progress = 1.0
 
-[node name="meleePivot" type="Node2D" parent="."]
+[node name="meleePivot" type="Area2D" parent="."]
+script = ExtResource("18_hxumx")
 
 [node name="faconSprite" type="AnimatedSprite2D" parent="meleePivot"]
 position = Vector2(36.7805, 2.49653)

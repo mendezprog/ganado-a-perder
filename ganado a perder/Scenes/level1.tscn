@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmty6jyo0vebn"]
+[gd_scene load_steps=5 format=3 uid="uid://cmty6jyo0vebn"]
 
 [ext_resource type="PackedScene" uid="uid://c84wqmnh8og6s" path="res://scenes/martin.tscn" id="1_g2h75"]
 [ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://scenes/soldado.tscn" id="2_wwpf4"]
 [ext_resource type="Texture2D" uid="uid://bju6yanpxlkke" path="res://Graficos/Misc/background.png" id="3_m7ahb"]
+[ext_resource type="PackedScene" uid="uid://cy1j0tecrrsw0" path="res://scenes/vaca.tscn" id="4_dwgg1"]
 
 [node name="Level1" type="Node2D"]
+position = Vector2(259, 178)
 
 [node name="Martin" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(-12, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
@@ -15,6 +18,10 @@ zoom = Vector2(2.5, 2.5)
 position = Vector2(104, -34)
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2(30, -10)
 texture = ExtResource("3_m7ahb")
+
+[node name="vaca" parent="." instance=ExtResource("4_dwgg1")]
+position = Vector2(-99, -48)

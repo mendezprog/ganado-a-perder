@@ -17,7 +17,7 @@ const WEAPON_KEYS := {
 	}
 }
 
-var health = 2
+var health = 20
 var dead = false
 var speed = 250
 var preventRotation := false
@@ -28,6 +28,7 @@ var trabucoBullet = preload("res://scenes/bullet.tscn")
 var meleeAttacking := false
 @onready var meleeSprite: AnimatedSprite2D = $meleePivot/faconSprite
 @onready var meleeCollider: CollisionPolygon2D = $meleePivot/faconCollision
+
 var isRolling = false
 var rollSpeed = 350
 var rollDirection = Vector2.ZERO
@@ -35,7 +36,7 @@ var rollDirection = Vector2.ZERO
 func _ready() -> void:
 	$trabucoSprite.hide()
 	meleeSprite.hide()
-	meleeCollider.hide()
+	meleeCollider.disabled = true
 
 func _physics_process(delta: float) -> void:
 	if isRolling:
@@ -91,16 +92,24 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("leftClick") and not meleeAttacking:
 				meleeAttacking = true
 				preventRotation = true
-				meleeCollider.show()
+
 				meleeSprite.show()
 				meleeSprite.play("swing")
+
+				# Pequeño retraso antes de activar la colisión (puede coincidir con el frame efectivo del golpe)
+				await get_tree().create_timer(0.1).timeout
 				meleeCollider.disabled = false
-				await get_tree().create_timer(0.3).timeout
+				meleeCollider.show()
+
+				# Ventana activa del golpe
+				await get_tree().create_timer(0.2).timeout
 				meleeCollider.disabled = true
-				meleeSprite.hide()
 				meleeCollider.hide()
+
+				meleeSprite.hide()
 				meleeAttacking = false
 				preventRotation = false
+
 	playAnim()
 
 func playAnim():
@@ -206,5 +215,4 @@ func start_roll():
 
 func player():
 	pass
-	
 	

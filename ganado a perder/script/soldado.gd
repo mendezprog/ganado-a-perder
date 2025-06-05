@@ -1,43 +1,35 @@
 extends CharacterBody2D
 
-
 var speed = 100
 var dead = false
 var health = 1
-var playerInArea = false
-var player
+var damage = 1
+var player: Node2D
 
 func _ready() -> void:
 	dead = false
-	
+	player = get_tree().get_first_node_in_group("Player")
+
 func _physics_process(delta: float) -> void:
-	if !dead:
-		$Detection/CollisionShape2D.disabled = false
-		if playerInArea:
-			position += (player.position - position) / speed
-	if dead:
-		$Detection/CollisionShape2D.disabled = true
+	if dead or player == null:
+		return
 
-func _on_detection_body_entered(body: Node2D) -> void:
-	if body.has_method("player"):
-		playerInArea = true
-		player = body
-
-func _on_detection_body_exited(body: Node2D) -> void:
-	if body.has_method("player"):
-		playerInArea = false
+	var direction = (player.global_position - global_position).normalized()
+	velocity = direction * speed
+	move_and_slide()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	var damage
-	if area.has_method("bulletEntered"):
-		damage = 1
-		takeDamage(damage)
+	if area.has_method("bulletEntered") or area.has_method("meleeEntered"):
+		take_damage(1)
+	elif area.is_in_group("Player"): # Daño al jugador
+		if area.has_method("take_damage"):
+			area.take_damage(damage)
 
-func takeDamage(damage):
-	health -= damage
-	if health <= 0 and !dead:
-		death()
+func take_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0 and not dead:
+		die()
 
-func death():
+func die() -> void:
 	dead = true
 	queue_free()
