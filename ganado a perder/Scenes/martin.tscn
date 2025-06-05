@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://c84wqmnh8og6s"]
+[gd_scene load_steps=155 format=3 uid="uid://c84wqmnh8og6s"]
 
 [ext_resource type="Script" uid="uid://bnricssdsl3g1" path="res://script/martin.gd" id="1_1aols"]
 [ext_resource type="Texture2D" uid="uid://b8h7fco1al07x" path="res://Graficos/martin/Rolling/pjROLLpos2.png" id="1_oenco"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://55v35wi1knr3" path="res://Graficos/martin/Trabuco/trabucoDisp.png" id="15_pg1o7"]
 [ext_resource type="Texture2D" uid="uid://crkj5opiiqovx" path="res://Graficos/martin/facon/facon.png" id="18_c4gyv"]
 [ext_resource type="Script" uid="uid://bqtua61s2kbi4" path="res://script/melee.gd" id="18_hxumx"]
+[ext_resource type="Texture2D" uid="uid://c6lxxm7dhlxtf" path="res://Graficos/martin/boleadoras/boleadoras.png" id="20_c4gyv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjetr"]
 atlas = ExtResource("2_1aols")
@@ -982,6 +983,56 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8vmuu"]
 radius = 9.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybsbj"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhnd2"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7efl"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1gjt"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c5lo"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0dpb"]
+atlas = ExtResource("20_c4gyv")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qhxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybsbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhnd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7efl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1gjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c5lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0dpb")
+}],
+"loop": true,
+"name": &"boleadora-idle-martin",
+"speed": 24.0
+}]
+
 [node name="Martin" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_1aols")
 
@@ -1000,9 +1051,7 @@ script = SubResource("GDScript_ll2e7")
 [node name="trabucoSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-5, 18)
 sprite_frames = SubResource("SpriteFrames_m45tx")
-animation = &"trabuco-reload"
-frame = 15
-frame_progress = 1.0
+animation = &"trabuco-idle"
 
 [node name="meleePivot" type="Area2D" parent="."]
 script = ExtResource("18_hxumx")
@@ -1024,3 +1073,10 @@ polygon = PackedVector2Array(-33, -7, -11, -32, -5, -24, -1, -16, -1, -7, -2, 3,
 [node name="CollisionShape2D" type="CollisionShape2D" parent="martinHitbox"]
 position = Vector2(2, 11)
 shape = SubResource("CapsuleShape2D_8vmuu")
+
+[node name="boleadoraSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, 24)
+sprite_frames = SubResource("SpriteFrames_0qhxd")
+animation = &"boleadora-idle-martin"
+frame = 1
+frame_progress = 0.432569

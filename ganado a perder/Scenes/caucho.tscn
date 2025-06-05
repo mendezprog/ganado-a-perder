@@ -89,3 +89,4 @@ frame_progress = 0.730095
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xvssp")
+disabled = true

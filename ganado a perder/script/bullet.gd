@@ -6,7 +6,7 @@ func _ready() -> void:
 	set_as_top_level(true)
 
 func bulletEntered():
-	pass
+	queue_free()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position += (Vector2.RIGHT*speed).rotated(rotation) * delta

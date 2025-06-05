@@ -5,6 +5,7 @@ var currentWeapon := "melee"
 const WEAPON_KEYS := {
 	"1": "melee",
 	"2": "trabuco",
+	"3": "boleadoras"
 }
 
 @onready var WEAPONS := {
@@ -14,6 +15,9 @@ const WEAPON_KEYS := {
 	},
 	"trabuco": {
 		"sprite": $trabucoSprite
+	},
+	"boleadoras": {
+		"sprite": $boleadoraSprite
 	}
 }
 
@@ -25,7 +29,12 @@ var playerState
 var lastDirection := Vector2.DOWN
 var trabucoCooldown = true
 var trabucoBullet = preload("res://scenes/bullet.tscn")
+var boleadoraInstance = preload("res://scenes/boleadora.tscn")
 var meleeAttacking := false
+var boleadorasAmmo := 3
+const MAX_BOLEADORAS := 3
+const BOLEADORAS_RELOAD_TIME := 5.0
+var canThrowBoleadora := true
 @onready var meleeSprite: AnimatedSprite2D = $meleePivot/faconSprite
 @onready var meleeCollider: CollisionPolygon2D = $meleePivot/faconCollision
 
@@ -37,6 +46,9 @@ func _ready() -> void:
 	$trabucoSprite.hide()
 	meleeSprite.hide()
 	meleeCollider.disabled = true
+	$boleadoraSprite.hide()
+	$boleadoraSprite.play("boleadora-idle-martin")
+	start_boleadoras_reload()
 
 func _physics_process(delta: float) -> void:
 	if isRolling:
@@ -85,7 +97,6 @@ func _physics_process(delta: float) -> void:
 				$trabucoSprite.play("trabuco-idle")
 				trabucoCooldown = true
 
-
 		"melee":
 			if not preventRotation:
 				$meleePivot.look_at(mousePos)
@@ -110,6 +121,24 @@ func _physics_process(delta: float) -> void:
 				meleeAttacking = false
 				preventRotation = false
 
+		"boleadoras":
+			$boleadoraSprite.look_at(mousePos)
+			if Input.is_action_just_pressed("leftClick") and canThrowBoleadora and boleadorasAmmo > 0:
+				canThrowBoleadora = false
+				boleadorasAmmo -= 1
+
+				var boleadora = boleadoraInstance.instantiate()
+				boleadora.global_position = $Marker2D.global_position
+				boleadora.rotation = $Marker2D.global_position.angle_to_point(mousePos)
+				add_child(boleadora)
+
+				await get_tree().create_timer(1).timeout  # Cooldown para evitar spam
+				canThrowBoleadora = true
+			if boleadorasAmmo == 0:
+				$boleadoraSprite.hide()
+			else:
+				$boleadoraSprite.show()
+				
 	playAnim()
 
 func playAnim():
@@ -161,16 +190,26 @@ func equip_weapon(weapon_name: String):
 			weapon["sprite"].hide()
 		if weapon.has("collider"):
 			weapon["collider"].disabled = true
+			weapon["collider"].hide()
+
+	# Resetear estado melee si se está cambiando de arma
+	if currentWeapon == "melee":
+		meleeAttacking = false
+		preventRotation = false
+		meleeSprite.hide()
+		meleeCollider.disabled = true
+		meleeCollider.hide()
 
 	# Mostrar solo el arma seleccionada
 	var selected = WEAPONS.get(weapon_name)
 	if selected:
-		if selected.has("sprite") and (weapon_name == "trabuco"):
+		if selected.has("sprite") and (weapon_name == "trabuco") or (weapon_name == "boleadoras"):
 			selected["sprite"].show()
 		if selected.has("collider"):
-			selected["collider"].disabled = false
+			selected["collider"].disabled = true  # desactivado por defecto hasta que ataques
 
 	currentWeapon = weapon_name
+
 
 func start_roll():
 	isRolling = true
@@ -216,3 +255,8 @@ func start_roll():
 func player():
 	pass
 	
+func start_boleadoras_reload():
+	await get_tree().create_timer(BOLEADORAS_RELOAD_TIME).timeout
+	if boleadorasAmmo < MAX_BOLEADORAS:
+		boleadorasAmmo += 1
+	start_boleadoras_reload()  # Reinicia la recarga automática
