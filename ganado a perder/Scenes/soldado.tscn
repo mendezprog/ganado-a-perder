@@ -48,7 +48,7 @@ radius = 60.0
 height = 266.667
 
 [node name="Soldado" type="CharacterBody2D" groups=["enemies"]]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_bi6p6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
