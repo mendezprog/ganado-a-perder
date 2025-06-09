@@ -30,6 +30,7 @@ limit_left = 0
 limit_top = 0
 limit_right = 765
 limit_bottom = 550
+position_smoothing_enabled = true
 
 [node name="Soldado" parent="." instance=ExtResource("2_wwpf4")]
 position = Vector2(-16, 94)

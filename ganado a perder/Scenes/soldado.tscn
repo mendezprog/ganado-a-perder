@@ -39,13 +39,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ii8kf"]
-radius = 60.0
-height = 270.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi6p6"]
+size = Vector2(120, 260)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvh3u"]
-radius = 60.0
-height = 266.667
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2u3q"]
+size = Vector2(120, 260)
 
 [node name="Soldado" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(0.1, 0.1)
@@ -58,11 +56,15 @@ frame = 3
 frame_progress = 0.234429
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_ii8kf")
+position = Vector2(-4.76837e-06, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_bi6p6")
+disabled = true
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-shape = SubResource("CapsuleShape2D_kvh3u")
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_f2u3q")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

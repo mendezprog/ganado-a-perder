@@ -21,22 +21,35 @@ const WEAPON_KEYS := {
 	}
 }
 
-var health = 20
-var dead = false
-var speed = 250
+var maxHealth := 10
+var health := 10
+var dead := false
+var mates := 3
+var mateHeal := 7
+var tomandoMates := false
+var knockoutPower := -1000 
+var speed := 250
 var preventRotation := false
 var playerState
 var lastDirection := Vector2.DOWN
-var trabucoCooldown = true
+var hurtState := false
+
+var trabucoCooldown := true
 var trabucoBullet = preload("res://scenes/bullet.tscn")
+var trabucoMaxAmmo := 25
+var trabucoCurrentAmmo := trabucoMaxAmmo
+
 var boleadoraInstance = preload("res://scenes/boleadora.tscn")
 var meleeAttacking := false
 var boleadorasAmmo := 3
 const MAX_BOLEADORAS := 3
 const BOLEADORAS_RELOAD_TIME := 5.0
 var canThrowBoleadora := true
+
 @onready var meleeSprite: AnimatedSprite2D = $meleePivot/faconSprite
 @onready var meleeCollider: CollisionPolygon2D = $meleePivot/faconCollision
+@onready var effects = $Effects
+@onready var martinHitbox = $martinHitbox
 
 var isRolling = false
 var rollSpeed = 350
@@ -46,6 +59,7 @@ func _ready() -> void:
 	$trabucoSprite.hide()
 	meleeSprite.hide()
 	meleeCollider.disabled = true
+	effects.play("RESET")
 	$boleadoraSprite.hide()
 	$boleadoraSprite.play("boleadora-idle-martin")
 	start_boleadoras_reload()
@@ -65,7 +79,8 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = direction * speed
 	move_and_slide()
-	
+	if Input.is_action_just_pressed("tomarMate"):
+		tomarMate()
 	weaponSelector()
 	if Input.is_action_just_pressed("rightClick") and not isRolling:
 		start_roll()
@@ -77,9 +92,11 @@ func _physics_process(delta: float) -> void:
 	match currentWeapon:
 		"trabuco":
 			$trabucoSprite.look_at(mousePos)
-			if Input.is_action_just_pressed("leftClick") and trabucoCooldown:
+			if trabucoCurrentAmmo <= 0: return
+			if Input.is_action_just_pressed("leftClick") and trabucoCooldown and !tomandoMates:
 				$trabucoSprite.play("trabuco-shoot")
 				trabucoCooldown = false
+				trabucoCurrentAmmo -= 5
 
 				# Dispara 5 balas en arco de 70°
 				var base_angle: float = $Marker2D.global_position.angle_to_point(mousePos)
@@ -90,7 +107,7 @@ func _physics_process(delta: float) -> void:
 					bullet.rotation = base_angle + spread_rad
 					bullet.global_position = $Marker2D.global_position
 					add_child(bullet)
-
+				if trabucoCurrentAmmo <= 0: return
 				await get_tree().create_timer(0.5).timeout
 				$trabucoSprite.play("trabuco-reload")
 				await get_tree().create_timer(2).timeout
@@ -100,7 +117,7 @@ func _physics_process(delta: float) -> void:
 		"melee":
 			if not preventRotation:
 				$meleePivot.look_at(mousePos)
-			if Input.is_action_just_pressed("leftClick") and not meleeAttacking:
+			if Input.is_action_just_pressed("leftClick") and not meleeAttacking and !tomandoMates:
 				meleeAttacking = true
 				preventRotation = true
 
@@ -123,10 +140,9 @@ func _physics_process(delta: float) -> void:
 
 		"boleadoras":
 			$boleadoraSprite.look_at(mousePos)
-			if Input.is_action_just_pressed("leftClick") and canThrowBoleadora and boleadorasAmmo > 0:
+			if Input.is_action_just_pressed("leftClick") and canThrowBoleadora and boleadorasAmmo > 0 and !tomandoMates:
 				canThrowBoleadora = false
 				boleadorasAmmo -= 1
-
 				var boleadora = boleadoraInstance.instantiate()
 				boleadora.global_position = $Marker2D.global_position
 				boleadora.rotation = $Marker2D.global_position.angle_to_point(mousePos)
@@ -136,12 +152,19 @@ func _physics_process(delta: float) -> void:
 				canThrowBoleadora = true
 			if boleadorasAmmo == 0:
 				$boleadoraSprite.hide()
+			elif WEAPONS["boleadoras"]: return
 			else:
 				$boleadoraSprite.show()
 				
 	playAnim()
+	if !hurtState:
+		for area in martinHitbox.get_overlapping_areas():
+			if area.name == "hitbox":
+				hurtByEnemy(area)
+	
 
 func playAnim():
+	if tomandoMates: return
 	var dir := lastDirection
 	if playerState == "moving":
 		dir = velocity.normalized()
@@ -176,13 +199,13 @@ func playAnim():
 			$martinSprite.play("side-running")
 
 func weaponSelector():
+	if tomandoMates: return
 	for key in WEAPON_KEYS.keys():
 		if Input.is_action_just_pressed(key):
 			var weapon_name = WEAPON_KEYS[key]
 			equip_weapon(weapon_name)
 			break
 			
-
 func equip_weapon(weapon_name: String):
 	# Ocultar todas las armas
 	for weapon in WEAPONS.values():
@@ -210,8 +233,9 @@ func equip_weapon(weapon_name: String):
 
 	currentWeapon = weapon_name
 
-
 func start_roll():
+	if tomandoMates:
+		return
 	isRolling = true
 	$martinCollision.hide()
 	rollDirection = lastDirection.normalized()
@@ -226,13 +250,13 @@ func start_roll():
 			$martinSprite.flip_h = false
 		elif dir.x < 0 and dir.y < 0:
 			$martinSprite.play("north-diagonal-rolling")
-			$martinSprite.flip_h = false
+			$martinSprite.flip_h = true
 		elif dir.x > 0 and dir.y > 0:
 			$martinSprite.play("south-diagonal-rolling")
 			$martinSprite.flip_h = false
 		elif dir.x < 0 and dir.y > 0:
 			$martinSprite.play("south-diagonal-rolling")
-			$martinSprite.flip_h = false
+			$martinSprite.flip_h = true
 	else:
 		if abs(dir.x) > abs(dir.y):
 			if dir.x > 0:
@@ -260,3 +284,49 @@ func start_boleadoras_reload():
 	if boleadorasAmmo < MAX_BOLEADORAS:
 		boleadorasAmmo += 1
 	start_boleadoras_reload()  # Reinicia la recarga automática
+
+func _on_martin_hitbox_area_entered(area: Area2D) -> void:
+	pass
+		
+		
+
+func death():
+	if health <= 0:
+		dead = true
+		queue_free()
+
+func tomarMate():
+	if health == 10 or mates <= 0:
+		return
+
+	print("Tomando mate")  # Debug
+	tomandoMates = true
+	mates -= 1
+
+	$martinSprite.play("mate")
+	await $martinSprite.animation_finished
+
+	health += mateHeal
+	if health > 10:
+		health = 10
+
+	tomandoMates = false
+
+
+func Knockback(enemyVelocity: Vector2):
+	var knockbackDirection = -(enemyVelocity - velocity).normalized() * knockoutPower
+	velocity = knockbackDirection
+	move_and_slide()
+
+func hurtByEnemy(area):
+	health -= 1
+	hurtState = true
+	Knockback(area.get_parent().velocity)
+	effects.play("hurtBlink")
+	await get_tree().create_timer(0.5).timeout
+	effects.play("RESET")
+	hurtState = false
+	death()
+
+func _on_martin_hitbox_area_exited(area: Area2D) -> void:
+	pass
