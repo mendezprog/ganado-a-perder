@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://cfbxqi60e3wbk"]
+
+[ext_resource type="Script" uid="uid://d17x3c2g3qeq0" path="res://script/caucho.gd" id="1_0imok"]
+[ext_resource type="Texture2D" uid="uid://cviuay3esrxwd" path="res://Graficos/caucho/corriendo/frente_corriendo_final.png" id="1_anp3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0imok"]
+radius = 11.0454
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh10v"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(40, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd7lw"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(140, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5dwg"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(240, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htuos"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(340, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx50i"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(440, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3w0h"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(540, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85kfo"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(640, 33, 20, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq6bh"]
+atlas = ExtResource("1_anp3f")
+region = Rect2(740, 33, 20, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtq4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh10v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd7lw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5dwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htuos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx50i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3w0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85kfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq6bh")
+}],
+"loop": true,
+"name": &"caucho-idle",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvssp"]
+size = Vector2(8, 16)
+
+[node name="Caucho" type="CharacterBody2D" groups=["caucho"]]
+script = ExtResource("1_0imok")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0imok")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rtq4k")
+animation = &"caucho-idle"
+frame = 7
+frame_progress = 0.730095
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xvssp")
+disabled = true

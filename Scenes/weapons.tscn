@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://eggx5ksh4n6l"]
+
+[ext_resource type="Texture2D" uid="uid://b8gtou6fs2cvh" path="res://Graficos/HUD/slotsArmas/sinslots.png" id="1_jq0ys"]
+
+[node name="Weapons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jq0ys")

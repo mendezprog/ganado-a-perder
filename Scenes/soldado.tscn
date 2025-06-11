@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxrnnhbnoi4p1"]
+
+[ext_resource type="Script" uid="uid://dir25mh74a3hw" path="res://script/soldado.gd" id="1_bi6p6"]
+[ext_resource type="Texture2D" uid="uid://vpb1uap4ilx7" path="res://Graficos/Soldado/idle/soldado_idle_frente.png" id="1_kvh3u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi6p6"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(0, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2u3q"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(280, 0, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8awo0"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(0, 280, 280, 280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g3c1"]
+atlas = ExtResource("1_kvh3u")
+region = Rect2(280, 280, 280, 280)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pdrry"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi6p6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2u3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8awo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g3c1")
+}],
+"loop": true,
+"name": &"soldado-idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi6p6"]
+size = Vector2(120, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2u3q"]
+size = Vector2(120, 260)
+
+[node name="Soldado" type="CharacterBody2D" groups=["enemies"]]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_bi6p6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pdrry")
+animation = &"soldado-idle"
+frame = 3
+frame_progress = 0.234429
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.76837e-06, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_bi6p6")
+disabled = true
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_f2u3q")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
