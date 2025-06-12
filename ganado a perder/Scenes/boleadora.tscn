@@ -69,4 +69,4 @@ frame = 4
 frame_progress = 0.187637
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1.5, 1.5)

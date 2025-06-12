@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GanadoAPerder"
-run/main_scene="res://scenes/level1.tscn"
+run/main_scene="uid://cmty6jyo0vebn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="uid://bior2wtnj1ge5"

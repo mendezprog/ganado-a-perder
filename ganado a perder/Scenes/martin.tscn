@@ -1128,21 +1128,6 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="Animation" id="Animation_118ar"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("martinSprite/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_c4gyv"]
 resource_name = "hurtBlink"
 length = 0.1
@@ -1158,6 +1143,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_118ar"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("martinSprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_654oe"]
@@ -1185,6 +1185,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="martinCollision" type="CollisionShape2D" parent="."]
 position = Vector2(2, 4.78571)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_c4gyv")
 script = SubResource("GDScript_ll2e7")
 
@@ -1214,6 +1215,7 @@ polygon = PackedVector2Array(-33, -7, -11, -32, -5, -24, -1, -16, -1, -7, -2, 3,
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="martinHitbox"]
 position = Vector2(2, 4.78571)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_118ar")
 
 [node name="boleadoraSprite" type="AnimatedSprite2D" parent="."]

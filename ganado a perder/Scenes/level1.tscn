@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cmty6jyo0vebn"]
 
-[ext_resource type="PackedScene" uid="uid://c84wqmnh8og6s" path="res://scenes/martin.tscn" id="1_g2h75"]
-[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://scenes/soldado.tscn" id="2_wwpf4"]
+[ext_resource type="PackedScene" uid="uid://c84wqmnh8og6s" path="res://Scenes/martin.tscn" id="1_g2h75"]
+[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://Scenes/soldado.tscn" id="2_wwpf4"]
 [ext_resource type="Texture2D" uid="uid://bvie648hew58" path="res://level1foto.jpeg" id="3_ru4tf"]
-[ext_resource type="PackedScene" uid="uid://cy1j0tecrrsw0" path="res://scenes/vaca.tscn" id="4_dwgg1"]
-[ext_resource type="PackedScene" uid="uid://cfbxqi60e3wbk" path="res://scenes/caucho.tscn" id="5_ru4tf"]
+[ext_resource type="PackedScene" uid="uid://cy1j0tecrrsw0" path="res://Scenes/vaca.tscn" id="4_dwgg1"]
+[ext_resource type="PackedScene" uid="uid://cfbxqi60e3wbk" path="res://Scenes/caucho.tscn" id="5_ru4tf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru4tf"]
 size = Vector2(794, 20)
