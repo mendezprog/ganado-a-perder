@@ -830,8 +830,7 @@ position = Vector2(722, 19)
 
 [node name="followCam" type="Camera2D" parent="Martin" node_paths=PackedStringArray("background")]
 position = Vector2(7.14276, 18.5714)
-zoom = Vector2(3, 3)
-position_smoothing_enabled = true
+zoom = Vector2(2.5, 2.5)
 position_smoothing_speed = 1.0
 script = ExtResource("4_mi65m")
 background = NodePath("../../background")

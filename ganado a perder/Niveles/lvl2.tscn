@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cneqa2dvlaayf"]
+[gd_scene load_steps=22 format=4 uid="uid://cneqa2dvlaayf"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_7f2hu"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_thc7x"]
@@ -1013,6 +1013,12 @@ size = Vector2(1175.5, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oab5t"]
 size = Vector2(10, 786.5)
 
+[sub_resource type="Curve2D" id="Curve2D_vfwev"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 76, 18, 0, 0, 0, 0, 75, 156, 0, 0, 0, 0, 341, 155, 0, 0, 0, 0, 405, 102, 0, 0, 0, 0, 523, 104, 0, 0, 0, 0, 523, 160, 0, 0, 0, 0, 1053, 157, 0, 0, 0, 0, 1055, 319, 0, 0, 0, 0, 185, 318, 0, 0, 0, 0, 185, 470, 0, 0, 0, 0, 423, 481, 0, 0, 0, 0, 427, 583, 0, 0, 0, 0, 607, 582, 0, 0, 0, 0, 610, 497, 0, 0, 0, 0, 982, 498, 0, 0, 0, 0, 982, 725)
+}
+point_count = 16
+
 [node name="lvl2" type="Node2D"]
 
 [node name="background" type="TileMapLayer" parent="."]
@@ -1040,3 +1046,6 @@ shape = SubResource("RectangleShape2D_efj7l")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1164, 383.75)
 shape = SubResource("RectangleShape2D_oab5t")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_vfwev")
