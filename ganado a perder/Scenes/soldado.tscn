@@ -57,14 +57,13 @@ frame_progress = 0.234429
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-06, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_bi6p6")
 disabled = true
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_f2u3q")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]

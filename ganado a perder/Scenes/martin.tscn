@@ -1128,6 +1128,21 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="Animation" id="Animation_118ar"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("martinSprite/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_c4gyv"]
 resource_name = "hurtBlink"
 length = 0.1
@@ -1143,21 +1158,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_118ar"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("martinSprite/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_654oe"]
@@ -1185,7 +1185,6 @@ color = Color(1, 1, 1, 0)
 
 [node name="martinCollision" type="CollisionShape2D" parent="."]
 position = Vector2(2, 4.78571)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_c4gyv")
 script = SubResource("GDScript_ll2e7")
 
@@ -1200,22 +1199,22 @@ animation = &"trabuco-idle"
 script = ExtResource("18_hxumx")
 
 [node name="faconSprite" type="AnimatedSprite2D" parent="meleePivot"]
-position = Vector2(36.7805, 2.49653)
+position = Vector2(48.78, 9)
+scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_ybsbj")
 animation = &"swing"
 frame = 4
 frame_progress = 1.0
 
 [node name="faconCollision" type="CollisionPolygon2D" parent="meleePivot"]
-position = Vector2(46.7805, 6.49653)
-scale = Vector2(0.792969, 0.868056)
+position = Vector2(64.78, 9)
+scale = Vector2(1.3, 1.3)
 polygon = PackedVector2Array(-33, -7, -11, -32, -5, -24, -1, -16, -1, -7, -2, 3, -10, 13)
 
 [node name="martinHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="martinHitbox"]
 position = Vector2(2, 4.78571)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_118ar")
 
 [node name="boleadoraSprite" type="AnimatedSprite2D" parent="."]

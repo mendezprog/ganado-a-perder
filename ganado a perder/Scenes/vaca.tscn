@@ -47,6 +47,7 @@ animations = [{
 radius = 50.0
 
 [node name="vaca" type="CharacterBody2D" groups=["vaca"]]
+collision_layer = 9
 script = ExtResource("1_2e5w4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -70,3 +71,6 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMartinOCaucho"]
 shape = SubResource("CircleShape2D_2e5w4")
+
+[connection signal="body_entered" from="AreaMartinOCaucho" to="." method="_on_area_martin_o_caucho_body_entered"]
+[connection signal="body_exited" from="AreaMartinOCaucho" to="." method="_on_area_martin_o_caucho_body_exited"]

@@ -63,3 +63,8 @@ shape = SubResource("RectangleShape2D_ejswk")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(523, 97.5)
 shape = SubResource("RectangleShape2D_bbk5w")
+
+[node name="Soldado2" parent="." instance=ExtResource("2_wwpf4")]
+
+[node name="Soldado3" parent="." instance=ExtResource("2_wwpf4")]
+position = Vector2(192, 162)

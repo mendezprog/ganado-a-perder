@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name martin extends CharacterBody2D
 
 var currentWeapon := "melee"
 
@@ -82,6 +82,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("tomarMate"):
 		tomarMate()
 	weaponSelector()
+	playAnim()
 	if Input.is_action_just_pressed("rightClick") and not isRolling:
 		start_roll()
 	
@@ -92,7 +93,9 @@ func _physics_process(delta: float) -> void:
 	match currentWeapon:
 		"trabuco":
 			$trabucoSprite.look_at(mousePos)
-			if trabucoCurrentAmmo <= 0: return
+			if trabucoCurrentAmmo <= 0: 
+				$trabucoSprite.play("trabuco-idle")
+				return
 			if Input.is_action_just_pressed("leftClick") and trabucoCooldown and !tomandoMates:
 				$trabucoSprite.play("trabuco-shoot")
 				trabucoCooldown = false
@@ -155,8 +158,6 @@ func _physics_process(delta: float) -> void:
 			elif WEAPONS["boleadoras"]: return
 			else:
 				$boleadoraSprite.show()
-				
-	playAnim()
 	if !hurtState:
 		for area in martinHitbox.get_overlapping_areas():
 			if area.name == "hitbox":

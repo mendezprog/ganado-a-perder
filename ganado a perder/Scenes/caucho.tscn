@@ -76,9 +76,9 @@ size = Vector2(8, 16)
 [node name="Caucho" type="CharacterBody2D" groups=["caucho"]]
 script = ExtResource("1_0imok")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="cauchoArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cauchoArea"]
 shape = SubResource("CircleShape2D_0imok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -89,4 +89,3 @@ frame_progress = 0.730095
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xvssp")
-disabled = true
