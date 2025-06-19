@@ -47,6 +47,7 @@ size = Vector2(120, 260)
 
 [node name="Soldado" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(0.1, 0.1)
+collision_layer = 8
 script = ExtResource("1_bi6p6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

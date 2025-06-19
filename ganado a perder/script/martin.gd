@@ -21,6 +21,8 @@ const WEAPON_KEYS := {
 	}
 }
 
+signal healthChanged
+
 var maxHealth := 10
 var health := 10
 var dead := false
@@ -150,8 +152,6 @@ func _physics_process(delta: float) -> void:
 				boleadora.global_position = $Marker2D.global_position
 				boleadora.rotation = $Marker2D.global_position.angle_to_point(mousePos)
 				add_child(boleadora)
-
-				await get_tree().create_timer(1).timeout  # Cooldown para evitar spam
 				canThrowBoleadora = true
 			if boleadorasAmmo == 0:
 				$boleadoraSprite.hide()
@@ -289,28 +289,26 @@ func start_boleadoras_reload():
 func _on_martin_hitbox_area_entered(area: Area2D) -> void:
 	pass
 		
-		
 
 func death():
 	if health <= 0:
 		dead = true
-		queue_free()
+		health = 10
+		get_tree().change_scene_to_file("res://Scenes/menu.tscn")
 
 func tomarMate():
 	if health == 10 or mates <= 0:
 		return
 
-	print("Tomando mate")  # Debug
 	tomandoMates = true
 	mates -= 1
-
 	$martinSprite.play("mate")
 	await $martinSprite.animation_finished
 
 	health += mateHeal
 	if health > 10:
 		health = 10
-
+	healthChanged.emit()
 	tomandoMates = false
 
 
@@ -320,8 +318,9 @@ func Knockback(enemyVelocity: Vector2):
 	move_and_slide()
 
 func hurtByEnemy(area):
-	health -= 1
 	hurtState = true
+	health -= 1
+	healthChanged.emit()
 	Knockback(area.get_parent().velocity)
 	effects.play("hurtBlink")
 	await get_tree().create_timer(0.5).timeout

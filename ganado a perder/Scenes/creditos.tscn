@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcsabuhsmom0h"]
+
+[ext_resource type="Script" uid="uid://bykk2kweywwuf" path="res://script/creditos.gd" id="1_lpe7s"]
+[ext_resource type="Texture2D" uid="uid://cgaibskjvpbtt" path="res://Graficos/HUD/menuPausa/creditos.png" id="1_ompal"]
+[ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="3_yyntd"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_lpe7s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 1077.0
+offset_bottom = 661.0
+texture = ExtResource("1_ompal")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 500.0
+offset_right = 541.0
+offset_bottom = 596.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_yyntd")
+theme_override_font_sizes/normal_font_size = 37
+text = "Presiona esc para volver al menu principal"
+fit_content = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 360)
+zoom = Vector2(1, 1.2)

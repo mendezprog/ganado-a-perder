@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn2630ghjrc6n"]
+
+[ext_resource type="Script" uid="uid://b873ekjkn5slj" path="res://script/enemy_spawner.gd" id="1_4l55s"]
+[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://Scenes/soldado.tscn" id="2_8h7h8"]
+
+[sub_resource type="GDScript" id="GDScript_8h7h8"]
+script/source = "extends Timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="enemy_spawner" type="Node2D"]
+script = ExtResource("1_4l55s")
+enemy_prefab = ExtResource("2_8h7h8")
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 10.0
+autostart = true
+script = SubResource("GDScript_8h7h8")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

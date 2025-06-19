@@ -73,7 +73,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvssp"]
 size = Vector2(8, 16)
 
-[node name="Caucho" type="CharacterBody2D" groups=["caucho"]]
+[node name="caucho" type="CharacterBody2D" groups=["caucho"]]
+collision_mask = 12
 script = ExtResource("1_0imok")
 
 [node name="cauchoArea" type="Area2D" parent="."]
