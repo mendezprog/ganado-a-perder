@@ -1,8 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcsabuhsmom0h"]
+[gd_scene load_steps=14 format=3 uid="uid://dcsabuhsmom0h"]
 
 [ext_resource type="Script" uid="uid://bykk2kweywwuf" path="res://script/creditos.gd" id="1_lpe7s"]
 [ext_resource type="Texture2D" uid="uid://cgaibskjvpbtt" path="res://Graficos/HUD/menuPausa/creditos.png" id="1_ompal"]
 [ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="3_yyntd"]
+[ext_resource type="Texture2D" uid="uid://r131pdpqjdjh" path="res://Graficos/martin/MartinCaucho.png" id="4_lpe7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyntd"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi66g"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arkb1"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1sk8"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q5dm"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mukbu"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cesle"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0fer"]
+atlas = ExtResource("4_lpe7s")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_137jf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyntd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi66g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arkb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1sk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q5dm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mukbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cesle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0fer")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_lpe7s")
@@ -35,3 +100,8 @@ fit_content = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 360)
 zoom = Vector2(1, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(422, 575)
+scale = Vector2(2.21875, 2.21875)
+sprite_frames = SubResource("SpriteFrames_137jf")

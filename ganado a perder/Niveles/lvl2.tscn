@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://cneqa2dvlaayf"]
+[gd_scene load_steps=36 format=4 uid="uid://cneqa2dvlaayf"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_7f2hu"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_thc7x"]
@@ -7,12 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://b6leoaoovttcj" path="res://Tiles/carretillas.png" id="5_pmbb3"]
 [ext_resource type="PackedScene" uid="uid://c84wqmnh8og6s" path="res://Scenes/martin.tscn" id="6_1g28f"]
 [ext_resource type="PackedScene" uid="uid://cy1j0tecrrsw0" path="res://Scenes/vaca.tscn" id="7_tnrnn"]
+[ext_resource type="Texture2D" uid="uid://b6xwcvp5ox7on" path="res://Graficos/HUD/cauchoState/cauchohappy.png" id="8_8hy5l"]
 [ext_resource type="PackedScene" uid="uid://cfbxqi60e3wbk" path="res://Scenes/caucho.tscn" id="8_rrr35"]
 [ext_resource type="PackedScene" uid="uid://cn2630ghjrc6n" path="res://Scenes/enemy_spawner.tscn" id="9_jnes5"]
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="9_kui1w"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="10_yd8gj"]
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="11_b87i1"]
+[ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="12_872ls"]
 [ext_resource type="Script" uid="uid://tm84gfkokbul" path="res://script/follow_cam.gd" id="13_d6rsu"]
+[ext_resource type="AudioStream" uid="uid://4d7vtcijmv0j" path="res://SFX/musica nivel 2.MP3" id="14_yd8gj"]
+[ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="15_d6rsu"]
+[ext_resource type="PackedScene" uid="uid://tj7wiw821a14" path="res://Niveles/lvl3.tscn" id="16_872ls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hktea"]
 texture = ExtResource("1_7f2hu")
@@ -1027,6 +1032,20 @@ _data = {
 }
 point_count = 16
 
+[sub_resource type="GDScript" id="GDScript_8hy5l"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="lvl2" type="Node2D"]
 
 [node name="background" type="TileMapLayer" parent="."]
@@ -1062,8 +1081,11 @@ curve = SubResource("Curve2D_vfwev")
 position = Vector2(80, 30)
 path_node = NodePath("../Path2D")
 
-[node name="caucho" parent="." instance=ExtResource("8_rrr35")]
+[node name="caucho" parent="." node_paths=PackedStringArray("texture_rect") instance=ExtResource("8_rrr35")]
 position = Vector2(42, 101)
+icon_pastorear = ExtResource("8_8hy5l")
+icon_attack = ExtResource("12_872ls")
+texture_rect = NodePath("../CanvasLayer/orderIcon")
 
 [node name="spawners" type="Node2D" parent="."]
 
@@ -1092,6 +1114,16 @@ texture_progress = ExtResource("10_yd8gj")
 script = ExtResource("11_b87i1")
 player = NodePath("../../Martin")
 
+[node name="orderIcon" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("12_872ls")
+script = SubResource("GDScript_8hy5l")
+
 [node name="Martin" parent="." instance=ExtResource("6_1g28f")]
 position = Vector2(141, 63)
 
@@ -1101,3 +1133,13 @@ zoom = Vector2(2.5, 2.5)
 position_smoothing_speed = 1.0
 script = ExtResource("13_d6rsu")
 background = NodePath("../../background")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_yd8gj")
+autoplay = true
+parameters/looping = true
+
+[node name="nextLevel" parent="." instance=ExtResource("15_d6rsu")]
+position = Vector2(982, 729)
+scale = Vector2(2, 1)
+level = ExtResource("16_872ls")

@@ -1,12 +1,16 @@
 class_name martin extends CharacterBody2D
 
 var currentWeapon := "melee"
+var previousWeapon := "melee"
 
 const WEAPON_KEYS := {
 	"1": "melee",
 	"2": "trabuco",
 	"3": "boleadoras"
 }
+
+var weaponList := ["melee", "trabuco", "boleadoras"]
+var weaponIndex := 0
 
 @onready var WEAPONS := {
 	"melee": {
@@ -35,6 +39,8 @@ var preventRotation := false
 var playerState
 var lastDirection := Vector2.DOWN
 var hurtState := false
+
+
 
 var trabucoCooldown := true
 var trabucoBullet = preload("res://scenes/bullet.tscn")
@@ -100,6 +106,7 @@ func _physics_process(delta: float) -> void:
 				return
 			if Input.is_action_just_pressed("leftClick") and trabucoCooldown and !tomandoMates:
 				$trabucoSprite.play("trabuco-shoot")
+				$trabucoSound.play()
 				trabucoCooldown = false
 				trabucoCurrentAmmo -= 5
 
@@ -128,6 +135,7 @@ func _physics_process(delta: float) -> void:
 
 				meleeSprite.show()
 				meleeSprite.play("swing")
+				$meleeSound.play()
 
 				# Pequeño retraso antes de activar la colisión (puede coincidir con el frame efectivo del golpe)
 				await get_tree().create_timer(0.1).timeout
@@ -148,6 +156,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("leftClick") and canThrowBoleadora and boleadorasAmmo > 0 and !tomandoMates:
 				canThrowBoleadora = false
 				boleadorasAmmo -= 1
+				$boleadoraSound.play()
 				var boleadora = boleadoraInstance.instantiate()
 				boleadora.global_position = $Marker2D.global_position
 				boleadora.rotation = $Marker2D.global_position.angle_to_point(mousePos)
@@ -199,15 +208,37 @@ func playAnim():
 		elif abs(dir.x) > 0.1:
 			$martinSprite.play("side-running")
 
+func _unhandled_input(event):
+	if event is InputEventMouseButton and not tomandoMates:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			weaponIndex = (weaponIndex + 1) % weaponList.size()
+			equip_weapon(weaponList[weaponIndex])
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			weaponIndex = (weaponIndex - 1 + weaponList.size()) % weaponList.size()
+			equip_weapon(weaponList[weaponIndex])
+
 func weaponSelector():
 	if tomandoMates: return
+
 	for key in WEAPON_KEYS.keys():
 		if Input.is_action_just_pressed(key):
 			var weapon_name = WEAPON_KEYS[key]
 			equip_weapon(weapon_name)
-			break
+			return
+
+	if Input.is_action_just_pressed("switch"):
+		var temp = currentWeapon
+		equip_weapon(previousWeapon)
+		previousWeapon = temp
 			
 func equip_weapon(weapon_name: String):
+	if weapon_name == currentWeapon:
+		return
+
+	previousWeapon = currentWeapon
+	currentWeapon = weapon_name
+	weaponIndex = weaponList.find(weapon_name)
+
 	# Ocultar todas las armas
 	for weapon in WEAPONS.values():
 		if weapon.has("sprite"):
@@ -216,23 +247,20 @@ func equip_weapon(weapon_name: String):
 			weapon["collider"].disabled = true
 			weapon["collider"].hide()
 
-	# Resetear estado melee si se está cambiando de arma
-	if currentWeapon == "melee":
+	# Reset melee
+	if previousWeapon == "melee":
 		meleeAttacking = false
 		preventRotation = false
 		meleeSprite.hide()
 		meleeCollider.disabled = true
 		meleeCollider.hide()
 
-	# Mostrar solo el arma seleccionada
 	var selected = WEAPONS.get(weapon_name)
 	if selected:
-		if selected.has("sprite") and (weapon_name == "trabuco") or (weapon_name == "boleadoras"):
+		if selected.has("sprite") and (weapon_name == "trabuco" or weapon_name == "boleadoras"):
 			selected["sprite"].show()
 		if selected.has("collider"):
-			selected["collider"].disabled = true  # desactivado por defecto hasta que ataques
-
-	currentWeapon = weapon_name
+			selected["collider"].disabled = true
 
 func start_roll():
 	if tomandoMates:
@@ -304,7 +332,7 @@ func tomarMate():
 	mates -= 1
 	$martinSprite.play("mate")
 	await $martinSprite.animation_finished
-
+	$mateSound.play()
 	health += mateHeal
 	if health > 10:
 		health = 10

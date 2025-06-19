@@ -10,6 +10,14 @@ var is_stunned := false
 func _ready() -> void:
 	dead = false
 	player = get_tree().get_first_node_in_group("Player")
+	
+	match get_tree().current_scene.name:
+		"lvl1":
+			health = 1
+		"lvl2":
+			health = 2
+		_:
+			health = 1  # valor por defecto
 
 func _physics_process(delta: float) -> void:
 	if dead or player == null or is_stunned:

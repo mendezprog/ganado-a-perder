@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://c4h6xae2o7sex"]
+[gd_scene load_steps=28 format=4 uid="uid://c4h6xae2o7sex"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_auqum"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_2167f"]
@@ -7,11 +7,14 @@
 [ext_resource type="Script" uid="uid://tm84gfkokbul" path="res://script/follow_cam.gd" id="4_mi65m"]
 [ext_resource type="PackedScene" uid="uid://cfbxqi60e3wbk" path="res://Scenes/caucho.tscn" id="5_mi65m"]
 [ext_resource type="PackedScene" uid="uid://cn2630ghjrc6n" path="res://Scenes/enemy_spawner.tscn" id="7_d7bm4"]
+[ext_resource type="Texture2D" uid="uid://b6xwcvp5ox7on" path="res://Graficos/HUD/cauchoState/cauchohappy.png" id="7_fk230"]
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="8_8n7to"]
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="8_x2u4t"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="9_g30dt"]
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="11_t51ua"]
+[ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="11_tqrv4"]
 [ext_resource type="PackedScene" uid="uid://cneqa2dvlaayf" path="res://Niveles/lvl2.tscn" id="12_tqrv4"]
+[ext_resource type="AudioStream" uid="uid://d1s473roua32t" path="res://SFX/Musica nivel 1.MP3" id="15_qo8l3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hktea"]
 texture = ExtResource("1_auqum")
@@ -802,6 +805,20 @@ _data = {
 }
 point_count = 13
 
+[sub_resource type="GDScript" id="GDScript_fk230"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="lvl1" type="Node2D"]
 
 [node name="background" type="TileMapLayer" parent="."]
@@ -844,8 +861,11 @@ background = NodePath("../../background")
 position = Vector2(767, 31)
 path_node = NodePath("../vacaPath")
 
-[node name="caucho" parent="." instance=ExtResource("5_mi65m")]
+[node name="caucho" parent="." node_paths=PackedStringArray("texture_rect") instance=ExtResource("5_mi65m")]
 position = Vector2(711, 57)
+icon_pastorear = ExtResource("7_fk230")
+icon_attack = ExtResource("11_tqrv4")
+texture_rect = NodePath("../CanvasLayer/orderIcon")
 
 [node name="vacaPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_mi65m")
@@ -877,7 +897,22 @@ texture_progress = ExtResource("9_g30dt")
 script = ExtResource("8_8n7to")
 player = NodePath("../../Martin")
 
+[node name="orderIcon" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("11_tqrv4")
+script = SubResource("GDScript_fk230")
+
 [node name="nextLevel" parent="." instance=ExtResource("11_t51ua")]
 position = Vector2(80, 529)
 scale = Vector2(2, 1)
 level = ExtResource("12_tqrv4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_qo8l3")
+autoplay = true
+parameters/looping = true

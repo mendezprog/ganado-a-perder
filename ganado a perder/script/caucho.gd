@@ -3,6 +3,9 @@ class_name caucho extends CharacterBody2D
 @export var speed := 250.0
 @export var stop_distance := 10.0
 @export var smoothing := 5.0
+@export var icon_pastorear: Texture
+@export var icon_attack: Texture
+@export var texture_rect: TextureRect
 
 var damage := 0.5
 var can_attack := true
@@ -35,7 +38,7 @@ func selectOrder():
 func pastorear(delta):
 	if not vaca:
 		return
-
+	texture_rect.texture = icon_pastorear
 	var to_vaca = vaca.global_position - global_position
 	if to_vaca.length() > stop_distance:
 		var direction = to_vaca.normalized()
@@ -51,8 +54,9 @@ func attackEnemy(delta):
 		current_target = get_closest_enemy()
 	if not current_target:
 		current_order = "pastorear" # <-- Aquí está el cambio clave
+		texture_rect.texture = icon_pastorear
 		return # Sal de la función attackEnemy, el próximo frame procesará pastorear
-
+	texture_rect.texture = icon_attack
 	var to_target = current_target.global_position - global_position
 	var direction = to_target.normalized()
 	var desired_velocity = direction * speed

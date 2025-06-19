@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=3 uid="uid://c84wqmnh8og6s"]
+[gd_scene load_steps=175 format=3 uid="uid://c84wqmnh8og6s"]
 
 [ext_resource type="Script" uid="uid://bnricssdsl3g1" path="res://script/martin.gd" id="1_1aols"]
 [ext_resource type="Texture2D" uid="uid://b8h7fco1al07x" path="res://Graficos/martin/Rolling/pjROLLpos2.png" id="1_oenco"]
@@ -20,6 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://crkj5opiiqovx" path="res://Graficos/martin/facon/facon.png" id="18_c4gyv"]
 [ext_resource type="Script" uid="uid://bqtua61s2kbi4" path="res://script/melee.gd" id="18_hxumx"]
 [ext_resource type="Texture2D" uid="uid://c6lxxm7dhlxtf" path="res://Graficos/martin/boleadoras/boleadoras.png" id="20_c4gyv"]
+[ext_resource type="AudioStream" uid="uid://de1frus1artvu" path="res://SFX/659461__trabuco.wav" id="21_fxmaa"]
+[ext_resource type="AudioStream" uid="uid://cltekx880xur7" path="res://SFX/cuchillo.mp3" id="22_oxmo1"]
+[ext_resource type="AudioStream" uid="uid://bn2f6fg1n8d8x" path="res://SFX/693366__ruido-de-mate.wav" id="23_5rag3"]
+[ext_resource type="AudioStream" uid="uid://ejr5beou1ch" path="res://SFX/boladeoras.mp3" id="24_llxm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qhxd"]
 atlas = ExtResource("2_c4gyv")
@@ -1229,6 +1233,20 @@ frame_progress = 0.432569
 libraries = {
 &"": SubResource("AnimationLibrary_654oe")
 }
+
+[node name="trabucoSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_fxmaa")
+
+[node name="meleeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_oxmo1")
+volume_db = 20.0
+
+[node name="mateSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_5rag3")
+
+[node name="boleadoraSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_llxm5")
+volume_db = -1.0
 
 [connection signal="area_entered" from="martinHitbox" to="." method="_on_martin_hitbox_area_entered"]
 [connection signal="area_exited" from="martinHitbox" to="." method="_on_martin_hitbox_area_exited"]
