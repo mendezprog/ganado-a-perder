@@ -6,8 +6,10 @@ var health = 1
 var damage = 1
 var player: Node2D
 var is_stunned := false
+@onready var effects: AnimationPlayer = $effects
 
 func _ready() -> void:
+	effects.play("RESET")
 	dead = false
 	player = get_tree().get_first_node_in_group("Player")
 	
@@ -43,11 +45,14 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		if area.has_method("take_damage"):
 			area.take_damage(damage)
 
-
 func take_damage(amount: float) -> void:
 	health -= amount
 	if health <= 0 and not dead:
 		die()
+		return
+	effects.play("hurtBlink")
+	await get_tree().create_timer(0.5).timeout
+	effects.play("RESET")
 
 func die() -> void:
 	dead = true

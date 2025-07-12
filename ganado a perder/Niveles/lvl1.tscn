@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c4h6xae2o7sex"]
+[gd_scene load_steps=29 format=4 uid="uid://c4h6xae2o7sex"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_auqum"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_2167f"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="11_t51ua"]
 [ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="11_tqrv4"]
 [ext_resource type="PackedScene" uid="uid://cneqa2dvlaayf" path="res://Niveles/lvl2.tscn" id="12_tqrv4"]
+[ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="13_xge2u"]
 [ext_resource type="AudioStream" uid="uid://d1s473roua32t" path="res://SFX/Musica nivel 1.MP3" id="15_qo8l3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hktea"]
@@ -801,9 +802,9 @@ size = Vector2(36, 566.25)
 
 [sub_resource type="Curve2D" id="Curve2D_mi65m"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 768, 10, 0, 0, 0, 0, 761, 186, 0, 0, 0, 0, 623, 202, 0, 0, 0, 0, 584, 236, 0, 0, 0, 0, 539, 308, 0, 0, 0, 0, 444, 325, 0, 0, 0, 0, 335, 331, 0, 0, 0, 0, 270, 349, 0, 0, 0, 0, 196, 368, 0, 0, 0, 0, 139, 368, 0, 0, 0, 0, 93, 368, 0, 0, 0, 0, 77, 419, 0, 0, 0, 0, 75, 525)
+"points": PackedVector2Array(0, 0, 0, 0, 768, 10, 0, 0, 0, 0, 768, 186, 0, 0, 0, 0, 623, 186, 0, 0, 0, 0, 623, 219, 0, 0, 0, 0, 577, 219, 0, 0, 0, 0, 577, 322, 0, 0, 0, 0, 270, 322, 0, 0, 0, 0, 270, 367, 0, 0, 0, 0, 77, 367, 0, 0, 0, 0, 77, 525)
 }
-point_count = 13
+point_count = 10
 
 [sub_resource type="GDScript" id="GDScript_fk230"]
 script/source = "extends TextureRect
@@ -907,12 +908,15 @@ grow_horizontal = 0
 texture = ExtResource("11_tqrv4")
 script = SubResource("GDScript_fk230")
 
+[node name="weaponHotBar" parent="CanvasLayer" instance=ExtResource("13_xge2u")]
+
 [node name="nextLevel" parent="." instance=ExtResource("11_t51ua")]
 position = Vector2(80, 529)
 scale = Vector2(2, 1)
 level = ExtResource("12_tqrv4")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_qo8l3")
+volume_db = -10.0
 autoplay = true
 parameters/looping = true

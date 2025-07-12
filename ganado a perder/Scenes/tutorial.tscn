@@ -17,19 +17,19 @@ loop = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(959, 546)
-zoom = Vector2(0.56, 0.65)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 59.0
-offset_top = 60.0
-offset_right = 442.0
-offset_bottom = 114.0
+offset_left = 429.0
+offset_top = 192.0
+offset_right = 812.0
+offset_bottom = 246.0
 theme_override_fonts/normal_font = ExtResource("3_i6t4g")
 theme_override_font_sizes/normal_font_size = 29
 text = "Presiona Enter para Comenzar"
 fit_content = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_i6t4g")
+volume_db = -10.0
 autoplay = true
 parameters/looping = true

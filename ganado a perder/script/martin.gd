@@ -1,5 +1,7 @@
 class_name martin extends CharacterBody2D
 
+signal weapon_changed(new_weapon: String)
+
 var currentWeapon := "melee"
 var previousWeapon := "melee"
 
@@ -130,12 +132,12 @@ func _physics_process(delta: float) -> void:
 			if not preventRotation:
 				$meleePivot.look_at(mousePos)
 			if Input.is_action_just_pressed("leftClick") and not meleeAttacking and !tomandoMates:
+				$meleeSound.play()
 				meleeAttacking = true
 				preventRotation = true
 
 				meleeSprite.show()
 				meleeSprite.play("swing")
-				$meleeSound.play()
 
 				# Pequeño retraso antes de activar la colisión (puede coincidir con el frame efectivo del golpe)
 				await get_tree().create_timer(0.1).timeout
@@ -154,9 +156,9 @@ func _physics_process(delta: float) -> void:
 		"boleadoras":
 			$boleadoraSprite.look_at(mousePos)
 			if Input.is_action_just_pressed("leftClick") and canThrowBoleadora and boleadorasAmmo > 0 and !tomandoMates:
+				$boleadoraSound.play()
 				canThrowBoleadora = false
 				boleadorasAmmo -= 1
-				$boleadoraSound.play()
 				var boleadora = boleadoraInstance.instantiate()
 				boleadora.global_position = $Marker2D.global_position
 				boleadora.rotation = $Marker2D.global_position.angle_to_point(mousePos)
@@ -261,7 +263,7 @@ func equip_weapon(weapon_name: String):
 			selected["sprite"].show()
 		if selected.has("collider"):
 			selected["collider"].disabled = true
-
+	weapon_changed.emit(currentWeapon)
 func start_roll():
 	if tomandoMates:
 		return
@@ -317,7 +319,6 @@ func start_boleadoras_reload():
 func _on_martin_hitbox_area_entered(area: Area2D) -> void:
 	pass
 		
-
 func death():
 	if health <= 0:
 		dead = true
@@ -338,7 +339,6 @@ func tomarMate():
 		health = 10
 	healthChanged.emit()
 	tomandoMates = false
-
 
 func Knockback(enemyVelocity: Vector2):
 	var knockbackDirection = -(enemyVelocity - velocity).normalized() * knockoutPower

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cneqa2dvlaayf"]
+[gd_scene load_steps=37 format=4 uid="uid://cneqa2dvlaayf"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_7f2hu"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_thc7x"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="11_b87i1"]
 [ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="12_872ls"]
 [ext_resource type="Script" uid="uid://tm84gfkokbul" path="res://script/follow_cam.gd" id="13_d6rsu"]
+[ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="14_xt4yg"]
 [ext_resource type="AudioStream" uid="uid://4d7vtcijmv0j" path="res://SFX/musica nivel 2.MP3" id="14_yd8gj"]
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="15_d6rsu"]
 [ext_resource type="PackedScene" uid="uid://tj7wiw821a14" path="res://Niveles/lvl3.tscn" id="16_872ls"]
@@ -1028,9 +1029,9 @@ size = Vector2(10, 786.5)
 
 [sub_resource type="Curve2D" id="Curve2D_vfwev"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 76, 18, 0, 0, 0, 0, 75, 156, 0, 0, 0, 0, 341, 155, 0, 0, 0, 0, 405, 102, 0, 0, 0, 0, 523, 104, 0, 0, 0, 0, 523, 160, 0, 0, 0, 0, 1053, 157, 0, 0, 0, 0, 1055, 319, 0, 0, 0, 0, 185, 318, 0, 0, 0, 0, 185, 470, 0, 0, 0, 0, 423, 481, 0, 0, 0, 0, 427, 583, 0, 0, 0, 0, 607, 582, 0, 0, 0, 0, 610, 497, 0, 0, 0, 0, 982, 498, 0, 0, 0, 0, 982, 725)
+"points": PackedVector2Array(0, 0, 0, 0, 76, 18, 0, 0, 0, 0, 76, 156, 0, 0, 0, 0, 362, 156, 0, 0, 0, 0, 362, 117, 0, 0, 0, 0, 393, 117, 0, 0, 0, 0, 393, 104, 0, 0, 0, 0, 523, 104, 0, 0, 0, 0, 523, 160, 0, 0, 0, 0, 1053, 160, 0, 0, 0, 0, 1053, 319, 0, 0, 0, 0, 185, 319, 0, 0, 0, 0, 185, 480, 0, 0, 0, 0, 423, 480, 0, 0, 0, 0, 423, 583, 0, 0, 0, 0, 607, 583, 0, 0, 0, 0, 607, 497, 0, 0, 0, 0, 982, 497, 0, 0, 0, 0, 982, 725)
 }
-point_count = 16
+point_count = 18
 
 [sub_resource type="GDScript" id="GDScript_8hy5l"]
 script/source = "extends TextureRect
@@ -1124,6 +1125,8 @@ grow_horizontal = 0
 texture = ExtResource("12_872ls")
 script = SubResource("GDScript_8hy5l")
 
+[node name="weaponHotBar" parent="CanvasLayer" instance=ExtResource("14_xt4yg")]
+
 [node name="Martin" parent="." instance=ExtResource("6_1g28f")]
 position = Vector2(141, 63)
 
@@ -1134,8 +1137,9 @@ position_smoothing_speed = 1.0
 script = ExtResource("13_d6rsu")
 background = NodePath("../../background")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_yd8gj")
+volume_db = -15.0
 autoplay = true
 parameters/looping = true
 

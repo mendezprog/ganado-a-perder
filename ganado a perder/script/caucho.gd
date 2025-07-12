@@ -6,10 +6,10 @@ class_name caucho extends CharacterBody2D
 @export var icon_pastorear: Texture
 @export var icon_attack: Texture
 @export var texture_rect: TextureRect
+@onready var caucho_sprite: AnimatedSprite2D = $CauchoSprite
 
 var damage := 0.5
 var can_attack := true
-
 
 var vaca: Node2D
 var current_order := "pastorear"
@@ -22,11 +22,18 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("orderCaucho"):
 		selectOrder()
 
+	Anims()
 	match current_order:
 		"attackEnemy":
 			attackEnemy(delta)
 		"pastorear":
 			pastorear(delta)
+
+func Anims():
+	if velocity.x == 0 and velocity.y == 0:
+		caucho_sprite.play("caucho-idle")
+	else:
+		caucho_sprite.play("caucho-run")
 
 func selectOrder():
 	if current_order == "pastorear":
@@ -63,7 +70,6 @@ func attackEnemy(delta):
 	velocity = velocity.lerp(desired_velocity, delta * smoothing)
 
 	move_and_slide()
-
 
 func get_closest_enemy() -> Node2D:
 	var enemies = get_tree().get_nodes_in_group("enemies")

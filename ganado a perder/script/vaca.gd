@@ -2,6 +2,8 @@ class_name vaca extends CharacterBody2D
 
 @export var path_node: Path2D
 @export var path_speed := 30.0
+@onready var vaca_sprite: AnimatedSprite2D = $vacaSprite
+
 
 var on_duty := false
 var path_progress := 0.0
@@ -12,6 +14,7 @@ func _ready():
 		path_node = get_tree().get_root().find_child("vacaPath", true, false)
 
 func _physics_process(delta):
+	anims()
 	if not on_duty or path_node == null:
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -28,6 +31,20 @@ func _physics_process(delta):
 	velocity = direction * path_speed
 	move_and_slide()
 
+func anims():
+	if velocity.x == 0 and velocity.y == 0:
+		vaca_sprite.play("vaca-idle")
+	elif velocity.y > 0:
+		vaca_sprite.play("vaca-down")
+	elif velocity.y < 0:
+		vaca_sprite.play("vaca-up")
+	elif velocity.x > 0:
+		vaca_sprite.play("vaca-side")
+		vaca_sprite.flip_h = false
+	elif velocity.x < 0:
+		vaca_sprite.play("vaca-side")
+		vaca_sprite.flip_h = true
+
 func _on_area_martin_o_caucho_body_entered(body: Node2D) -> void:
 	if body.name == "Martin" or body.name == "caucho":
 		on_duty = true
@@ -39,7 +56,6 @@ func _on_area_martin_o_caucho_body_entered(body: Node2D) -> void:
 		path_speed = 15
 	else:
 		path_speed = 30
-
 
 func _on_area_martin_o_caucho_body_exited(body: Node2D) -> void:
 	if body.name == "Martin" or body.name == "caucho":
