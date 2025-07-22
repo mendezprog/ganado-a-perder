@@ -1,0 +1,245 @@
+[gd_scene load_steps=28 format=3 uid="uid://6gt720yuyn1o"]
+
+[ext_resource type="Texture2D" uid="uid://btkujutkk7hbb" path="res://Graficos/HUD/mejoras/mejorasTabla.png" id="1_54md0"]
+[ext_resource type="Script" uid="uid://chuupygm087dn" path="res://script/upgrade_screen.gd" id="1_fs7ot"]
+[ext_resource type="Texture2D" uid="uid://d0vi407eyu2fu" path="res://Graficos/HUD/mejoras/mejoraSalud.png" id="2_l53bo"]
+[ext_resource type="Texture2D" uid="uid://my8dvb7ewq5c" path="res://Graficos/GUI/Menu/blackBackground.png" id="2_u1dip"]
+[ext_resource type="Texture2D" uid="uid://dal0ix4h850jg" path="res://Graficos/HUD/mejoras/mejoraBalas.png" id="3_l5wmx"]
+[ext_resource type="Texture2D" uid="uid://bx1hpmypkrs70" path="res://Graficos/HUD/mejoras/mejoraCaucho.png" id="4_2oxtv"]
+[ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="5_gmf5r"]
+[ext_resource type="Texture2D" uid="uid://6bx7sd0epsqc" path="res://Graficos/HUD/menuPausa/botonBase.png" id="8_urcjo"]
+[ext_resource type="Texture2D" uid="uid://cb7it7ngs5ktg" path="res://Graficos/npc/npc1Idle.png" id="9_8pmss"]
+[ext_resource type="Texture2D" uid="uid://c12jcxskdatbo" path="res://Graficos/npc/npc2Idle.png" id="10_rki43"]
+[ext_resource type="Texture2D" uid="uid://chw3lxibtxe7q" path="res://Graficos/npc/npc3Idle.png" id="11_caqbg"]
+[ext_resource type="AudioStream" uid="uid://bdix871r4u1tq" path="res://SFX/La Cumbre Dormida - Jovenes Viejos.mp3" id="12_u1dip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkkix"]
+atlas = ExtResource("9_8pmss")
+region = Rect2(0, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82ong"]
+atlas = ExtResource("9_8pmss")
+region = Rect2(32, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsy46"]
+atlas = ExtResource("9_8pmss")
+region = Rect2(64, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy3na"]
+atlas = ExtResource("9_8pmss")
+region = Rect2(96, 22, 32, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfhnr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkkix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82ong")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsy46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy3na")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxuir"]
+atlas = ExtResource("10_rki43")
+region = Rect2(0, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4old4"]
+atlas = ExtResource("10_rki43")
+region = Rect2(32, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmowq"]
+atlas = ExtResource("10_rki43")
+region = Rect2(64, 22, 32, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xexe4"]
+atlas = ExtResource("10_rki43")
+region = Rect2(96, 22, 32, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kshwx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxuir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4old4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmowq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xexe4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1ivp"]
+atlas = ExtResource("11_caqbg")
+region = Rect2(0, 14, 32, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjify"]
+atlas = ExtResource("11_caqbg")
+region = Rect2(32, 14, 32, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8raf"]
+atlas = ExtResource("11_caqbg")
+region = Rect2(64, 14, 32, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oq4r"]
+atlas = ExtResource("11_caqbg")
+region = Rect2(96, 14, 32, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwb5p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1ivp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjify")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8raf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oq4r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="UpgradeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fs7ot")
+
+[node name="BlackBackground" type="Sprite2D" parent="."]
+texture = ExtResource("2_u1dip")
+centered = false
+
+[node name="MejorasMenu" type="Sprite2D" parent="."]
+position = Vector2(542, 461)
+texture = ExtResource("1_54md0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MejorasMenu"]
+offset_left = -462.0
+offset_top = -213.0
+offset_right = 465.0
+offset_bottom = 16.0
+theme_override_constants/separation = 120
+
+[node name="Salud" type="Button" parent="MejorasMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_hover_color = Color(0.701961, 0.701961, 0.701961, 1)
+icon = ExtResource("2_l53bo")
+flat = true
+icon_alignment = 1
+
+[node name="Balas" type="Button" parent="MejorasMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_hover_color = Color(0.701961, 0.701961, 0.701961, 1)
+icon = ExtResource("3_l5wmx")
+flat = true
+icon_alignment = 1
+
+[node name="Caucho" type="Button" parent="MejorasMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_hover_color = Color(0.701961, 0.701961, 0.701961, 1)
+icon = ExtResource("4_2oxtv")
+flat = true
+icon_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MejorasMenu"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -449.0
+offset_top = 34.0
+offset_right = 448.0
+offset_bottom = 109.0
+theme_override_fonts/normal_font = ExtResource("5_gmf5r")
+theme_override_font_sizes/normal_font_size = 32
+text = "..."
+fit_content = true
+
+[node name="Confirmar" type="Button" parent="MejorasMenu"]
+offset_left = -444.0
+offset_top = 119.0
+offset_right = -178.0
+offset_bottom = 197.0
+theme_override_colors/font_outline_color = Color(0.17, 0.0736667, 0, 1)
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_gmf5r")
+theme_override_font_sizes/font_size = 32
+text = "CONFIRMAR"
+icon = ExtResource("8_urcjo")
+flat = true
+icon_alignment = 1
+
+[node name="SiguienteNivel" type="Button" parent="MejorasMenu"]
+offset_left = 184.0
+offset_top = 119.0
+offset_right = 450.0
+offset_bottom = 197.0
+theme_override_colors/font_outline_color = Color(0.17, 0.0736667, 0, 1)
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_gmf5r")
+theme_override_font_sizes/font_size = 32
+text = "CONTINUAR"
+icon = ExtResource("8_urcjo")
+flat = true
+icon_alignment = 1
+
+[node name="Cuidadora" type="AnimatedSprite2D" parent="MejorasMenu"]
+position = Vector2(351, -297)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_cfhnr")
+animation = &"idle"
+
+[node name="Armero" type="AnimatedSprite2D" parent="MejorasMenu"]
+position = Vector2(-1, -297)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_kshwx")
+animation = &"idle"
+
+[node name="Cocinera" type="AnimatedSprite2D" parent="MejorasMenu"]
+position = Vector2(-344, -308)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_nwb5p")
+animation = &"idle"
+frame = 2
+frame_progress = 0.586491
+
+[node name="Titulo" type="RichTextLabel" parent="MejorasMenu"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -692.5
+offset_top = -430.0
+offset_right = -331.5
+offset_bottom = -390.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("5_gmf5r")
+theme_override_font_sizes/normal_font_size = 32
+text = "SELECCIONÁ 2 MEJORAS"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_u1dip")
+autoplay = true

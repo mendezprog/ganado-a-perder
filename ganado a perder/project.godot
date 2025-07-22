@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="uid://bior2wtnj1ge5"
 
+[autoload]
+
+GlobalStats="*res://script/globalStats.gd"
+
 [display]
 
 window/size/viewport_width=1080

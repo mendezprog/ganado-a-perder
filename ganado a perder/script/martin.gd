@@ -73,6 +73,12 @@ func _ready() -> void:
 	$boleadoraSprite.hide()
 	$boleadoraSprite.play("boleadora-idle-martin")
 	start_boleadoras_reload()
+	
+	trabucoMaxAmmo = GlobalStats.trabuco_max_ammo
+	trabucoCurrentAmmo = trabucoMaxAmmo
+	maxHealth = GlobalStats.martin_max_health
+	health = maxHealth
+
 
 func _physics_process(delta: float) -> void:
 	if isRolling:
@@ -124,7 +130,7 @@ func _physics_process(delta: float) -> void:
 				if trabucoCurrentAmmo <= 0: return
 				await get_tree().create_timer(0.5).timeout
 				$trabucoSprite.play("trabuco-reload")
-				await get_tree().create_timer(2).timeout
+				await get_tree().create_timer(GlobalStats.trabuco_reload_time).timeout
 				$trabucoSprite.play("trabuco-idle")
 				trabucoCooldown = true
 

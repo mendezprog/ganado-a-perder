@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cmv7mabwl5ptu"
+path="res://.godot/imported/Sin Rumbo - Inaban.mp3-309a03d04b7d80bc7e4887346c6ae764.mp3str"
+
+[deps]
+
+source_file="res://SFX/Sin Rumbo - Inaban.mp3"
+dest_files=["res://.godot/imported/Sin Rumbo - Inaban.mp3-309a03d04b7d80bc7e4887346c6ae764.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="14_xt4yg"]
 [ext_resource type="AudioStream" uid="uid://4d7vtcijmv0j" path="res://SFX/musica nivel 2.MP3" id="14_yd8gj"]
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="15_d6rsu"]
-[ext_resource type="PackedScene" uid="uid://tj7wiw821a14" path="res://Niveles/lvl3.tscn" id="16_872ls"]
+[ext_resource type="PackedScene" uid="uid://cyv2ddhiwtnmc" path="res://Niveles/lvl3.tscn" id="16_872ls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hktea"]
 texture = ExtResource("1_7f2hu")

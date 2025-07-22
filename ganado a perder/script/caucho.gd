@@ -17,6 +17,7 @@ var current_target: Node2D = null
 
 func _ready():
 	vaca = get_tree().get_first_node_in_group("vaca")
+	damage = GlobalStats.caucho_damage
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("orderCaucho"):

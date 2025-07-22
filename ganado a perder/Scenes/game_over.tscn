@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://3u65gbpoj4w7"]
+
+[ext_resource type="Script" uid="uid://cyet4gfd8u4lo" path="res://script/game_over.gd" id="1_ek8ke"]
+[ext_resource type="Texture2D" uid="uid://djbipb0ux41qn" path="res://Graficos/GUI/Menu/pantalla de derrota.png" id="2_eoghk"]
+[ext_resource type="Texture2D" uid="uid://vorhy48dbywo" path="res://Graficos/GUI/Menu/GameOverText.png" id="3_14u15"]
+[ext_resource type="AudioStream" uid="uid://cmv7mabwl5ptu" path="res://SFX/Sin Rumbo - Inaban.mp3" id="4_eoghk"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ek8ke")
+
+[node name="PantallaDeDerrota" type="Sprite2D" parent="."]
+position = Vector2(542.5, 243)
+scale = Vector2(0.565104, 0.5)
+texture = ExtResource("2_eoghk")
+
+[node name="GameOverText" type="Sprite2D" parent="."]
+position = Vector2(358, 186)
+texture = ExtResource("3_14u15")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eoghk")
+autoplay = true
