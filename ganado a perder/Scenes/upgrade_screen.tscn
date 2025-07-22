@@ -242,4 +242,5 @@ text = "SELECCIONÁ 2 MEJORAS"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_u1dip")
+volume_db = -20.0
 autoplay = true

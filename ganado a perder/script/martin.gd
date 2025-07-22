@@ -329,7 +329,7 @@ func death():
 	if health <= 0:
 		dead = true
 		health = 10
-		get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func tomarMate():
 	if health == 10 or mates <= 0:
