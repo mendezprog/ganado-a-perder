@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cfbxqi60e3wbk"]
+[gd_scene load_steps=15 format=3 uid="uid://cfbxqi60e3wbk"]
 
 [ext_resource type="Script" uid="uid://d17x3c2g3qeq0" path="res://script/caucho.gd" id="1_0imok"]
 [ext_resource type="Texture2D" uid="uid://cviuay3esrxwd" path="res://Graficos/caucho/corriendo/frente_corriendo_final.png" id="1_anp3f"]
-[ext_resource type="Texture2D" uid="uid://dhvc5eafg0vqr" path="res://Graficos/caucho/corriendo/costado.png" id="3_tr48y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0imok"]
 radius = 11.0454
@@ -43,38 +42,6 @@ region = Rect2(640, 33, 20, 33)
 atlas = ExtResource("1_anp3f")
 region = Rect2(740, 33, 20, 33)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_two81"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(25, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ow8dj"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(127, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bkl2n"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(229, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_svn58"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(331, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4806v"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(433, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_odgvv"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(535, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6htdv"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(637, 33, 34, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m2ppb"]
-atlas = ExtResource("3_tr48y")
-region = Rect2(739, 33, 34, 33)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_rtq4k"]
 animations = [{
 "frames": [{
@@ -113,35 +80,6 @@ animations = [{
 "loop": true,
 "name": &"caucho-run",
 "speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_two81")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ow8dj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bkl2n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_svn58")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4806v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_odgvv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6htdv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m2ppb")
-}],
-"loop": true,
-"name": &"caucho-run-side",
-"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvssp"]
@@ -158,7 +96,7 @@ shape = SubResource("CircleShape2D_0imok")
 
 [node name="CauchoSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rtq4k")
-animation = &"caucho-run-side"
+animation = &"caucho-idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xvssp")

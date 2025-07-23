@@ -79,7 +79,6 @@ func _ready() -> void:
 	maxHealth = GlobalStats.martin_max_health
 	health = maxHealth
 
-
 func _physics_process(delta: float) -> void:
 	if isRolling:
 		velocity = rollDirection * rollSpeed
@@ -180,7 +179,6 @@ func _physics_process(delta: float) -> void:
 			if area.name == "hitbox":
 				hurtByEnemy(area)
 	
-
 func playAnim():
 	if tomandoMates: return
 	var dir := lastDirection
@@ -323,7 +321,12 @@ func start_boleadoras_reload():
 	start_boleadoras_reload()  # Reinicia la recarga automática
 
 func _on_martin_hitbox_area_entered(area: Area2D) -> void:
-	pass
+	if isRolling:
+		return
+		
+	if area.has_method("bulletEnteredMartin"):
+		area.bulletEnteredMartin()
+		hurtByEnemy(area)
 		
 func death():
 	if health <= 0:

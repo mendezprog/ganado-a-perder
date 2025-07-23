@@ -1,25 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxrnnhbnoi4p1"]
+[gd_scene load_steps=14 format=3 uid="uid://cttp4jwj8ckwx"]
 
-[ext_resource type="Script" uid="uid://dir25mh74a3hw" path="res://script/soldado.gd" id="1_bi6p6"]
-[ext_resource type="Texture2D" uid="uid://vpb1uap4ilx7" path="res://Graficos/Soldado/idle/soldado_idle_frente.png" id="1_kvh3u"]
+[ext_resource type="Script" uid="uid://caxtp4q4tbtg8" path="res://script/soldado_disparador.gd" id="1_pcfs6"]
+[ext_resource type="Texture2D" uid="uid://vpb1uap4ilx7" path="res://Graficos/Soldado/idle/soldado_idle_frente.png" id="2_5iqtg"]
+[ext_resource type="PackedScene" uid="uid://ctv0x4nmwj3vf" path="res://Scenes/enemy_bullet.tscn" id="2_pvbyl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi6p6"]
-atlas = ExtResource("1_kvh3u")
+atlas = ExtResource("2_5iqtg")
 region = Rect2(0, 0, 280, 280)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2u3q"]
-atlas = ExtResource("1_kvh3u")
+atlas = ExtResource("2_5iqtg")
 region = Rect2(280, 0, 280, 280)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8awo0"]
-atlas = ExtResource("1_kvh3u")
+atlas = ExtResource("2_5iqtg")
 region = Rect2(0, 280, 280, 280)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6g3c1"]
-atlas = ExtResource("1_kvh3u")
+atlas = ExtResource("2_5iqtg")
 region = Rect2(280, 280, 280, 280)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_pdrry"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_8xq7q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -39,10 +40,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi6p6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvbyl"]
 size = Vector2(120, 260)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2u3q"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8ijb"]
 size = Vector2(120, 260)
 
 [sub_resource type="Animation" id="Animation_gs3qh"]
@@ -83,14 +84,15 @@ _data = {
 &"hurtBlink": SubResource("Animation_w111x")
 }
 
-[node name="Soldado" type="CharacterBody2D" groups=["enemies"]]
+[node name="soldado_disparador" type="CharacterBody2D" groups=["enemies"]]
 scale = Vector2(0.1, 0.1)
 collision_layer = 8
-script = ExtResource("1_bi6p6")
+script = ExtResource("1_pcfs6")
+bullet_scene = ExtResource("2_pvbyl")
 
 [node name="soldadoSprite" type="AnimatedSprite2D" parent="."]
 clip_children = 2
-sprite_frames = SubResource("SpriteFrames_pdrry")
+sprite_frames = SubResource("SpriteFrames_8xq7q")
 animation = &"soldado-idle"
 
 [node name="ColorRect" type="ColorRect" parent="soldadoSprite"]
@@ -103,18 +105,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-06, 0)
-shape = SubResource("RectangleShape2D_bi6p6")
+shape = SubResource("RectangleShape2D_pvbyl")
 disabled = true
 
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-shape = SubResource("RectangleShape2D_f2u3q")
+shape = SubResource("RectangleShape2D_l8ijb")
 
 [node name="effects" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_owwe3")
 }
 
+[node name="visibility_notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]

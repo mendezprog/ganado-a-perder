@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://cneqa2dvlaayf"]
+[gd_scene load_steps=38 format=4 uid="uid://cneqa2dvlaayf"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_7f2hu"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_thc7x"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cn2630ghjrc6n" path="res://Scenes/enemy_spawner.tscn" id="9_jnes5"]
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="9_kui1w"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="10_yd8gj"]
+[ext_resource type="PackedScene" uid="uid://cttp4jwj8ckwx" path="res://Scenes/soldado_disparador.tscn" id="11_74wx0"]
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="11_b87i1"]
 [ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="12_872ls"]
 [ext_resource type="Script" uid="uid://tm84gfkokbul" path="res://script/follow_cam.gd" id="13_d6rsu"]
@@ -1092,17 +1093,22 @@ texture_rect = NodePath("../CanvasLayer/orderIcon")
 
 [node name="enemy_spawner" parent="spawners" instance=ExtResource("9_jnes5")]
 position = Vector2(846, 593)
+enemy_prefab = ExtResource("11_74wx0")
 
 [node name="enemy_spawner2" parent="spawners" instance=ExtResource("9_jnes5")]
+process_mode = 4
 position = Vector2(651, 256)
 
 [node name="enemy_spawner3" parent="spawners" instance=ExtResource("9_jnes5")]
+process_mode = 4
 position = Vector2(566, 413)
 
 [node name="enemy_spawner4" parent="spawners" instance=ExtResource("9_jnes5")]
+process_mode = 4
 position = Vector2(1100, 460)
 
 [node name="enemy_spawner5" parent="spawners" instance=ExtResource("9_jnes5")]
+process_mode = 4
 position = Vector2(207, 556)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

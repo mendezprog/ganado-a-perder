@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs4j6mlilaxde"
-path="res://.godot/imported/atras_corriendo_final.png-a4a6a8289ca08f26caa0f08f04477244.ctex"
+uid="uid://crxvdkxwgirk2"
+path="res://.godot/imported/caucho_costado.png-346062d0c5051dd1c2ca26a8fc07f363.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graficos/caucho/corriendo/atras_corriendo_final.png"
-dest_files=["res://.godot/imported/atras_corriendo_final.png-a4a6a8289ca08f26caa0f08f04477244.ctex"]
+source_file="res://Graficos/caucho/corriendo/caucho_costado.png"
+dest_files=["res://.godot/imported/caucho_costado.png-346062d0c5051dd1c2ca26a8fc07f363.ctex"]
 
 [params]
 
