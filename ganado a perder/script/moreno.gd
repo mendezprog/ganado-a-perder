@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed = 50
 var charge_speed = 300
-var charge_duration = 0.5
+var charge_duration = 0.1
 var dead = false
 var health = 50
 var damage = 1
@@ -29,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func start_charge_loop() -> void:
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(5).timeout
 	while not dead:
 		await charge()
-		await get_tree().create_timer(10.0).timeout
+		await get_tree().create_timer(5).timeout
 
 func charge() -> void:
 	is_charging = true

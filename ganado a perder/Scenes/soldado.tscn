@@ -116,5 +116,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_owwe3")
 }
 
+[node name="pickUpSpawnPoint" type="Marker2D" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]

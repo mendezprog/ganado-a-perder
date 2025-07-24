@@ -7,6 +7,7 @@ class_name caucho extends CharacterBody2D
 @export var icon_attack: Texture
 @export var texture_rect: TextureRect
 @onready var caucho_sprite: AnimatedSprite2D = $CauchoSprite
+@onready var caucho_area: Area2D = $cauchoArea
 
 var damage := 0.5
 var can_attack := true

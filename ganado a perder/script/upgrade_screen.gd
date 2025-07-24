@@ -38,7 +38,7 @@ func _on_salud_mouse_entered():
 	label.text = "Incrementa la salud máxima de Martín (suma 5 puntos de salud)."
 
 func _on_balas_mouse_entered():
-	label.text = "Aumenta la capacidad máxima de munición del trabuco en 5 unidades y baja el tiempo de recarga 0.3 segundos."
+	label.text = "Aumenta la capacidad máxima de munición del trabuco en 5 unidades, baja el tiempo de recarga 0.3 segundos y aumenta el daño del facón."
 
 func _on_cauchoDMG_mouse_entered():
 	label.text = "Aumenta el daño que Caucho inflige en 0.5 puntos."
@@ -76,6 +76,7 @@ func _on_confirmar_pressed():
 			"balas":
 				GlobalStats.trabuco_max_ammo += 5
 				GlobalStats.trabuco_reload_time -= 0.3
+				GlobalStats.facon_damage = GlobalStats.facon_damage * 2
 			"cauchoDMG":
 				GlobalStats.caucho_damage += 0.5
 

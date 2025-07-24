@@ -112,16 +112,19 @@ func _physics_process(delta: float) -> void:
 	match currentWeapon:
 		"trabuco":
 			$trabucoSprite.look_at(mousePos)
-			if trabucoCurrentAmmo <= 0: 
-				$trabucoSprite.play("trabuco-idle")
-				return
 			if Input.is_action_just_pressed("leftClick") and trabucoCooldown and !tomandoMates:
+				trabucoCooldown = false
+				
+				if trabucoCurrentAmmo < 5:
+					$trabucoSprite.play("trabuco-idle") # Reproduce animación de inactividad si no hay balas
+					await get_tree().create_timer(GlobalStats.trabuco_reload_time).timeout # Espera el tiempo de recarga
+					trabucoCooldown = true
+					return # No hay suficientes balas, salimos
+				
 				$trabucoSprite.play("trabuco-shoot")
 				$trabucoSound.play()
-				trabucoCooldown = false
 				trabucoCurrentAmmo -= 5
 
-				# Dispara 5 balas en arco de 70°
 				var base_angle: float = $Marker2D.global_position.angle_to_point(mousePos)
 				for i in 5:
 					var bullet = trabucoBullet.instantiate()
@@ -130,7 +133,7 @@ func _physics_process(delta: float) -> void:
 					bullet.rotation = base_angle + spread_rad
 					bullet.global_position = $Marker2D.global_position
 					add_child(bullet)
-				if trabucoCurrentAmmo <= 0: return
+				
 				await get_tree().create_timer(0.5).timeout
 				$trabucoSprite.play("trabuco-reload")
 				await get_tree().create_timer(GlobalStats.trabuco_reload_time).timeout
@@ -328,6 +331,11 @@ func _on_martin_hitbox_area_entered(area: Area2D) -> void:
 	if isRolling:
 		return
 		
+	if area.has_method("collect"):
+		area.collect()
+		trabucoCurrentAmmo += 3
+		if trabucoCurrentAmmo > GlobalStats.trabuco_max_ammo:
+			trabucoCurrentAmmo = GlobalStats.trabuco_max_ammo
 	if area.get_parent() != null and area.get_parent().name == "serpiente": # Asegúrate que "serpiente" sea el nombre del nodo principal de tu serpiente
 		if not poisoned:
 			poisoned = true

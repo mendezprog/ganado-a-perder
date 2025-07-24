@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://cyv2ddhiwtnmc"]
+[gd_scene load_steps=65 format=4 uid="uid://cyv2ddhiwtnmc"]
 
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="1_i2a17"]
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="2_elig0"]
@@ -29,6 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="27_dpv8w"]
 [ext_resource type="PackedScene" uid="uid://cn2630ghjrc6n" path="res://Scenes/enemy_spawner.tscn" id="28_qlvli"]
 [ext_resource type="PackedScene" uid="uid://b7aayck4g4b2j" path="res://Scenes/aborigen.tscn" id="29_n7iv0"]
+[ext_resource type="PackedScene" uid="uid://60wlb72u64du" path="res://Scenes/serpiente.tscn" id="30_dpv8w"]
+[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://Scenes/soldado.tscn" id="31_jkwqc"]
+[ext_resource type="PackedScene" uid="uid://cttp4jwj8ckwx" path="res://Scenes/soldado_disparador.tscn" id="32_qyxmk"]
+[ext_resource type="PackedScene" uid="uid://hec3bhd5vnqu" path="res://Scenes/puma.tscn" id="33_2c4ea"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ki1t6"]
 texture = ExtResource("1_i2a17")
@@ -3034,6 +3038,34 @@ script = SubResource("GDScript_qyxmk")
 
 [node name="weaponHotBar" parent="CanvasLayer" instance=ExtResource("27_dpv8w")]
 
-[node name="enemy_spawner" parent="." instance=ExtResource("28_qlvli")]
-position = Vector2(410, 400)
+[node name="spawners" type="Node2D" parent="."]
+
+[node name="enemy_spawner" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(924, 235)
 enemy_prefab = ExtResource("29_n7iv0")
+spawn_interval = 10.0
+
+[node name="enemy_spawner2" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(553, 296)
+enemy_prefab = ExtResource("30_dpv8w")
+spawn_interval = 15.0
+
+[node name="enemy_spawner3" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(565, 545)
+enemy_prefab = ExtResource("31_jkwqc")
+spawn_interval = 15.0
+
+[node name="enemy_spawner4" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(104, 432)
+enemy_prefab = ExtResource("32_qyxmk")
+spawn_interval = 10.0
+
+[node name="enemy_spawner5" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(750, 365)
+enemy_prefab = ExtResource("33_2c4ea")
+spawn_interval = 20.0
+
+[node name="enemy_spawner6" parent="spawners" instance=ExtResource("28_qlvli")]
+position = Vector2(1351, 174)
+enemy_prefab = ExtResource("29_n7iv0")
+spawn_interval = 10.0

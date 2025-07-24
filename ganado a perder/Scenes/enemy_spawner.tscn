@@ -21,7 +21,7 @@ script = ExtResource("1_4l55s")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 script = SubResource("GDScript_8h7h8")
 

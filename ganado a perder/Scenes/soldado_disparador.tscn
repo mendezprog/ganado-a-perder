@@ -120,4 +120,6 @@ libraries = {
 
 [node name="visibility_notifier" type="VisibleOnScreenNotifier2D" parent="."]
 
+[node name="pickUpSpawnPoint" type="Marker2D" parent="."]
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

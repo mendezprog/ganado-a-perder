@@ -38,13 +38,13 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		area.bulletEntered()
 		take_damage(1)
 	elif area.has_method("meleeEntered"):
-		take_damage(1)
+		take_damage(GlobalStats.facon_damage)
 	elif area.has_method("boleadoraEntered"):
 		area.boleadoraEntered()
 		stun()
 	elif area.name == "cauchoArea" and area.get_parent().has_method("cauchoEntered"):
 		area.get_parent().cauchoEntered()
-		take_damage(0.5)
+		take_damage(GlobalStats.caucho_damage)
 	elif area.is_in_group("Player"): # Daño al jugador
 		serpiente_sprite.play("attack")
 		await get_tree().create_timer(0.5).timeout

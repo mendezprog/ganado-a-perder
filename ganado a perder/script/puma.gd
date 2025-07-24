@@ -4,7 +4,7 @@ var speed = 150
 var dead = false
 var health = 1
 var damage = 1
-var vaca: Node2D
+var vacaInstance: Node2D
 var is_stunned := false
 @onready var effects: AnimationPlayer = $effects
 @onready var puma_sprite: AnimatedSprite2D = $pumaSprite
@@ -13,7 +13,7 @@ var is_stunned := false
 func _ready() -> void:
 	effects.play("RESET")
 	dead = false
-	vaca = get_tree().get_first_node_in_group("vaca")
+	vacaInstance = get_tree().get_first_node_in_group("vaca")
 	
 	match get_tree().current_scene.name:
 		"lvl1":
@@ -26,10 +26,10 @@ func _ready() -> void:
 			health = 1  # valor por defecto
 
 func _physics_process(delta: float) -> void:
-	if dead or vaca == null or is_stunned:
+	if dead or vacaInstance == null or is_stunned:
 		return
 
-	var direction = (vaca.global_position - global_position).normalized()
+	var direction = (vacaInstance.global_position - global_position).normalized()
 	velocity = direction * speed
 	move_and_slide()
 	anims()
@@ -39,14 +39,14 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		area.bulletEntered()
 		take_damage(1)
 	elif area.has_method("meleeEntered"):
-		take_damage(1)
+		take_damage(GlobalStats.facon_damage)
 	elif area.has_method("boleadoraEntered"):
 		area.boleadoraEntered()
 		stun()
 	elif area.name == "cauchoArea" and area.get_parent().has_method("cauchoEntered"):
 		area.get_parent().cauchoEntered()
-		take_damage(0.5)
-	elif area.is_in_group("vaca"): # Daño a la vaca
+		take_damage(GlobalStats.caucho_damage)
+	elif area.is_in_group("vacaInstance"): # Daño a la vacaInstance
 		puma_sprite.play("attack")
 		await get_tree().create_timer(0.5).timeout
 

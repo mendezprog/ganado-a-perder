@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://c4h6xae2o7sex"]
+[gd_scene load_steps=30 format=4 uid="uid://c4h6xae2o7sex"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_auqum"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_2167f"]
@@ -11,8 +11,9 @@
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="8_8n7to"]
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="8_x2u4t"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="9_g30dt"]
-[ext_resource type="PackedScene" uid="uid://60wlb72u64du" path="res://Scenes/serpiente.tscn" id="10_xge2u"]
+[ext_resource type="PackedScene" uid="uid://cttp4jwj8ckwx" path="res://Scenes/soldado_disparador.tscn" id="11_ry2xr"]
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="11_t51ua"]
+[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://Scenes/soldado.tscn" id="11_tlp2j"]
 [ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="11_tqrv4"]
 [ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="13_xge2u"]
 [ext_resource type="AudioStream" uid="uid://d1s473roua32t" path="res://SFX/Musica nivel 1.MP3" id="15_qo8l3"]
@@ -875,7 +876,28 @@ curve = SubResource("Curve2D_mi65m")
 
 [node name="enemy_spawner" parent="spawners" instance=ExtResource("7_d7bm4")]
 position = Vector2(278, 204)
-enemy_prefab = ExtResource("10_xge2u")
+enemy_prefab = ExtResource("11_ry2xr")
+spawn_interval = 10.0
+
+[node name="enemy_spawner2" parent="spawners" instance=ExtResource("7_d7bm4")]
+position = Vector2(607, 396)
+enemy_prefab = ExtResource("11_ry2xr")
+spawn_interval = 10.0
+
+[node name="enemy_spawner3" parent="spawners" instance=ExtResource("7_d7bm4")]
+position = Vector2(116, 118)
+enemy_prefab = ExtResource("11_tlp2j")
+spawn_interval = 15.0
+
+[node name="enemy_spawner4" parent="spawners" instance=ExtResource("7_d7bm4")]
+position = Vector2(746, 397)
+enemy_prefab = ExtResource("11_tlp2j")
+spawn_interval = 15.0
+
+[node name="enemy_spawner5" parent="spawners" instance=ExtResource("7_d7bm4")]
+position = Vector2(401, 111)
+enemy_prefab = ExtResource("11_tlp2j")
+spawn_interval = 15.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -87,7 +87,6 @@ func _on_puma_damage_body_exited(body: Node2D) -> void:
 		pumas_en_area.erase(body)
 		if pumas_en_area.is_empty():
 			timer.stop()
-			timer.start(15) # Reinicia tiempo a 15s por seguridad
 
 func _on_timer_timeout() -> void:
 	GlobalStats.emit_signal("vaca_perdida")
