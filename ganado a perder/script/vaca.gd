@@ -1,12 +1,15 @@
 class_name vaca extends CharacterBody2D
 
+
 @export var path_node: Path2D
 @export var path_speed := 30.0
 @onready var vaca_sprite: AnimatedSprite2D = $vacaSprite
-
+@onready var puma_damage: Area2D = $pumaDamage
+@onready var timer: Timer = $Timer
 
 var on_duty := false
 var path_progress := 0.0
+var pumas_en_area: Array[Node2D] = []
 
 func _ready():
 	# Nos aseguramos que haya un path válido
@@ -70,3 +73,21 @@ func _on_area_martin_o_caucho_body_exited(body: Node2D) -> void:
 				on_duty = true
 				path_speed = 15
 				break
+
+func _on_puma_damage_body_entered(body: Node2D) -> void:
+	if body.name == "puma":
+		if not pumas_en_area.has(body):
+			pumas_en_area.append(body)
+		if not timer.is_stopped():
+			return
+		timer.start()
+
+func _on_puma_damage_body_exited(body: Node2D) -> void:
+	if body.name == "puma":
+		pumas_en_area.erase(body)
+		if pumas_en_area.is_empty():
+			timer.stop()
+			timer.start(15) # Reinicia tiempo a 15s por seguridad
+
+func _on_timer_timeout() -> void:
+	GlobalStats.emit_signal("vaca_perdida")

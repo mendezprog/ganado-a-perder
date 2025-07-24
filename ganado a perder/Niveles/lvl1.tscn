@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://c4h6xae2o7sex"]
+[gd_scene load_steps=29 format=4 uid="uid://c4h6xae2o7sex"]
 
 [ext_resource type="Texture2D" uid="uid://b34k1dwsev0it" path="res://Tiles/sprite_nivel1.png" id="1_auqum"]
 [ext_resource type="Texture2D" uid="uid://dyl7gl0gsoj2s" path="res://Tiles/GRASS.png" id="2_2167f"]
@@ -11,10 +11,9 @@
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="8_8n7to"]
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="8_x2u4t"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="9_g30dt"]
-[ext_resource type="PackedScene" uid="uid://dxrnnhbnoi4p1" path="res://Scenes/soldado.tscn" id="10_tlp2j"]
+[ext_resource type="PackedScene" uid="uid://60wlb72u64du" path="res://Scenes/serpiente.tscn" id="10_xge2u"]
 [ext_resource type="PackedScene" uid="uid://bcpmsgpe0tw2q" path="res://Scenes/next_level.tscn" id="11_t51ua"]
 [ext_resource type="Texture2D" uid="uid://cjodgxdigwuwh" path="res://Graficos/HUD/cauchoState/cauchoangry.png" id="11_tqrv4"]
-[ext_resource type="PackedScene" uid="uid://cneqa2dvlaayf" path="res://Niveles/lvl2.tscn" id="12_tqrv4"]
 [ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="13_xge2u"]
 [ext_resource type="AudioStream" uid="uid://d1s473roua32t" path="res://SFX/Musica nivel 1.MP3" id="15_qo8l3"]
 
@@ -420,17 +419,17 @@ texture = ExtResource("1_auqum")
 3:2/0 = 0
 4:2/0 = 0
 0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.179859, -1.43887, 8, -6.83463, 8, 8, 4.13675, 8, -1.79859, 8, -4.31661, 3.77703)
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.76626, -8, 8, -8, 8, 8, 4.76626, 8)
 1:3/0 = 0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0.539576, -3.0576, 5.39576, 4.67633, 4.13675, 8, -8, 8)
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.76626, -8, -8, -8, -8, 8, -4.76626, 8)
 0:4/0 = 0
-0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1.25901, -8, 8, -6.83463, 8, 8, 5.93534, 2.69788, 2.33816, 0.539577, -2.51802, -4.13675)
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.76626, -8, 8, -8, 8, 8, 4.76626, 8)
 1:4/0 = 0
-1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, -0.719435, -0.359716, -5.2159, 8, -8, 8)
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.76626, -8, -8, -8, -8, 8, -4.76626, 8)
 0:5/0 = 0
-0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -6.83463, 8, 8, 4.49647, 2.33816, 5.75548, -1.61873)
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(4.76626, -8, 8, -8, 8, 2.96767, 4.5864, 2.60795)
 1:5/0 = 0
-1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.2159, -8, -2.1583, 1.25901, -8, 1.07915, -8, -8)
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.76626, -8, -8, -8, -8, 2.96767, -4.5864, 2.60795)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_84lu0"]
 texture = ExtResource("2_2167f")
@@ -748,13 +747,13 @@ texture = ExtResource("2_2167f")
 16:12/0 = 0
 17:12/0 = 0
 18:12/0 = 0
-18:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -3.23746, -3.0576)
+18:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.40654, -2.78781, 8, -3.14753, 8, 8, -4.22668, 8)
 19:12/0 = 0
-19:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -8, -6.65477)
+19:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -2.96767, 8, -3.14753, 8, 8, -8, 8)
 20:12/0 = 0
-20:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -8, -6.65477)
+20:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -2.96767, 8, -3.14753, 8, 8, -8, 8)
 21:12/0 = 0
-21:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.95689, -3.0576, 8, 8, -8, 8, -8, -6.65477)
+21:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -2.96767, 3.32739, -2.60795, 2.78781, 8, -8, 8)
 22:12/0 = 0
 23:12/0 = 0
 24:12/0 = 0
@@ -854,7 +853,7 @@ position = Vector2(722, 19)
 
 [node name="followCam" type="Camera2D" parent="Martin" node_paths=PackedStringArray("background")]
 position = Vector2(7.14276, 18.5714)
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 position_smoothing_speed = 1.0
 script = ExtResource("4_mi65m")
 background = NodePath("../../background")
@@ -876,7 +875,7 @@ curve = SubResource("Curve2D_mi65m")
 
 [node name="enemy_spawner" parent="spawners" instance=ExtResource("7_d7bm4")]
 position = Vector2(278, 204)
-enemy_prefab = ExtResource("10_tlp2j")
+enemy_prefab = ExtResource("10_xge2u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -903,7 +902,6 @@ script = SubResource("GDScript_fk230")
 [node name="nextLevel" parent="." instance=ExtResource("11_t51ua")]
 position = Vector2(80, 529)
 scale = Vector2(2, 1)
-level = ExtResource("12_tqrv4")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_qo8l3")

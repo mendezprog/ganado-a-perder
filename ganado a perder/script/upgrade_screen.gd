@@ -84,4 +84,19 @@ func _on_confirmar_pressed():
 	label.text = "¡Mejoras aplicadas! Podés continuar."
 
 func _on_siguiente_nivel_pressed():
-	get_tree().change_scene_to_file("res://scenes/lvl2.tscn")  # Cambiá esto por la escena real
+	var next_scene := ""
+
+	match GlobalStats.current_level:
+		0:
+			next_scene = "res://Niveles/lvl1.tscn"
+		1:
+			next_scene = "res://Niveles/lvl2.tscn"
+		2:
+			next_scene = "res://Niveles/lvl3.tscn"
+		3:
+			next_scene = "res://Niveles/lvlfinal.tscn"
+		_:
+			print("Nivel no válido:", GlobalStats.current_level)
+			return
+
+	get_tree().change_scene_to_file(next_scene)

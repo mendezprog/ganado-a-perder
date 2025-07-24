@@ -36,18 +36,21 @@ offset_bottom = 719.0
 
 [node name="Jugar" type="Button" parent="Control/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.858824)
 icon = ExtResource("3_wwsa2")
 flat = true
 icon_alignment = 1
 
 [node name="Opciones" type="Button" parent="Control/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.858824)
 icon = ExtResource("4_jsrd8")
 flat = true
 icon_alignment = 1
 
 [node name="Salir" type="Button" parent="Control/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.858824)
 icon = ExtResource("5_wbdvm")
 flat = true
 icon_alignment = 1

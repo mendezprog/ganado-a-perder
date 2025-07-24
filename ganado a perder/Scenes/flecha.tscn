@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://djcnyeihsnktr"]
+
+[ext_resource type="Script" uid="uid://dn7r60p1n50dq" path="res://script/enemy_bullet.gd" id="1_7p3hv"]
+[ext_resource type="Texture2D" uid="uid://bp12xotnueau6" path="res://Graficos/aborigenes/flecha/flecha.png" id="1_khu2l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p3hv"]
+size = Vector2(17, 6)
+
+[node name="flecha" type="Area2D"]
+collision_layer = 9
+collision_mask = 5
+script = ExtResource("1_7p3hv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_khu2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_7p3hv")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

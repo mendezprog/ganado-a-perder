@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cy1j0tecrrsw0"]
+[gd_scene load_steps=39 format=3 uid="uid://cy1j0tecrrsw0"]
 
 [ext_resource type="Script" uid="uid://d3tixetmu2jdx" path="res://script/vaca.gd" id="1_2e5w4"]
 [ext_resource type="Texture2D" uid="uid://c0oeveav2tu7k" path="res://Graficos/vaca/idle/IdleVacafrente.png" id="1_mamiw"]
@@ -232,6 +232,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2e5w4"]
 radius = 50.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5k7b"]
+size = Vector2(26, 26)
+
 [node name="vaca" type="CharacterBody2D" groups=["vaca"]]
 collision_layer = 18
 collision_mask = 34
@@ -257,5 +260,17 @@ shape = SubResource("RectangleShape2D_mamiw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMartinOCaucho"]
 shape = SubResource("CircleShape2D_2e5w4")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="pumaDamage" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pumaDamage"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_t5k7b")
+
 [connection signal="body_entered" from="AreaMartinOCaucho" to="." method="_on_area_martin_o_caucho_body_entered"]
 [connection signal="body_exited" from="AreaMartinOCaucho" to="." method="_on_area_martin_o_caucho_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="pumaDamage" to="." method="_on_puma_damage_body_entered"]
+[connection signal="body_exited" from="pumaDamage" to="." method="_on_puma_damage_body_exited"]

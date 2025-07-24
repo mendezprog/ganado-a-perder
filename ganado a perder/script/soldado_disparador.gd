@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	var distance = to_player.length()
 
 	# Movimiento solo si está cerca
-	if distance <= FOLLOW_DISTANCE:
+	if distance >= FOLLOW_DISTANCE:
 		var direction = to_player.normalized()
 		velocity = direction * speed
 		move_and_slide()

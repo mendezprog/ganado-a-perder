@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d1venauqge2uu"
+path="res://.godot/imported/Musica nivel 3.MP3-fbd67857f5dc397194e511cca12297dc.mp3str"
+
+[deps]
+
+source_file="res://SFX/Musica nivel 3.MP3"
+dest_files=["res://.godot/imported/Musica nivel 3.MP3-fbd67857f5dc397194e511cca12297dc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

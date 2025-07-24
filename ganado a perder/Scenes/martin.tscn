@@ -1248,5 +1248,9 @@ stream = ExtResource("23_5rag3")
 stream = ExtResource("24_llxm5")
 volume_db = -1.0
 
+[node name="poison_timer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="area_entered" from="martinHitbox" to="." method="_on_martin_hitbox_area_entered"]
 [connection signal="area_exited" from="martinHitbox" to="." method="_on_martin_hitbox_area_exited"]
+[connection signal="timeout" from="poison_timer" to="." method="_on_poison_timer_timeout"]

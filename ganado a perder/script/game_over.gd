@@ -13,3 +13,4 @@ func _process(delta: float) -> void:
 func restart():
 	await get_tree().create_timer(6).timeout
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
+	GlobalStats.current_level = 1

@@ -40,9 +40,8 @@ var speed := 250
 var preventRotation := false
 var playerState
 var lastDirection := Vector2.DOWN
+var poisoned := false
 var hurtState := false
-
-
 
 var trabucoCooldown := true
 var trabucoBullet = preload("res://scenes/bullet.tscn")
@@ -60,6 +59,7 @@ var canThrowBoleadora := true
 @onready var meleeCollider: CollisionPolygon2D = $meleePivot/faconCollision
 @onready var effects = $Effects
 @onready var martinHitbox = $martinHitbox
+@onready var poison_timer: Timer = $poison_timer
 
 var isRolling = false
 var rollSpeed = 350
@@ -78,6 +78,10 @@ func _ready() -> void:
 	trabucoCurrentAmmo = trabucoMaxAmmo
 	maxHealth = GlobalStats.martin_max_health
 	health = maxHealth
+	
+	if GlobalStats.is_connected("vaca_perdida", _on_vaca_perdida) == false:
+		GlobalStats.vaca_perdida.connect(_on_vaca_perdida)
+
 
 func _physics_process(delta: float) -> void:
 	if isRolling:
@@ -324,21 +328,31 @@ func _on_martin_hitbox_area_entered(area: Area2D) -> void:
 	if isRolling:
 		return
 		
+	if area.get_parent() != null and area.get_parent().name == "serpiente": # Asegúrate que "serpiente" sea el nombre del nodo principal de tu serpiente
+		if not poisoned:
+			poisoned = true
+			poison_timer.start()
+		hurtByEnemy(area)
 	if area.has_method("bulletEnteredMartin"):
 		area.bulletEnteredMartin()
 		hurtByEnemy(area)
 		
 func death():
 	if health <= 0:
+		poisoned = false
+		poison_timer.stop()
 		dead = true
 		health = 10
 		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+		GlobalStats.current_level = 0
 
 func tomarMate():
 	if health == 10 or mates <= 0:
 		return
 
 	tomandoMates = true
+	poisoned = false
+	poison_timer.stop()
 	mates -= 1
 	$martinSprite.play("mate")
 	await $martinSprite.animation_finished
@@ -354,11 +368,22 @@ func Knockback(enemyVelocity: Vector2):
 	velocity = knockbackDirection
 	move_and_slide()
 
-func hurtByEnemy(area):
+func hurtByEnemy(area: Area2D):
 	hurtState = true
 	health -= 1
 	healthChanged.emit()
-	Knockback(area.get_parent().velocity)
+
+	var enemy_velocity := Vector2.ZERO
+	var enemy_parent = area.get_parent()
+
+	# Si el padre tiene una propiedad "velocity", asumimos que la tiene y es un Vector2
+	if enemy_parent != null and "velocity" in enemy_parent:
+		enemy_velocity = enemy_parent.velocity
+
+	# Solo aplicar knockback si tiene velocidad válida (> 0.1 para evitar errores flotantes)
+	if enemy_velocity.length() > 0.1:
+		Knockback(enemy_velocity)
+
 	effects.play("hurtBlink")
 	await get_tree().create_timer(0.5).timeout
 	effects.play("RESET")
@@ -367,3 +392,22 @@ func hurtByEnemy(area):
 
 func _on_martin_hitbox_area_exited(area: Area2D) -> void:
 	pass
+
+func _on_vaca_perdida():
+	print("Señal de vaca_perdida recibida en Martin")
+	health = 0
+	death()
+	
+func isPoisoned():
+	return poisoned
+
+func _on_poison_timer_timeout() -> void:
+	if poisoned:
+		health -= 1
+		healthChanged.emit()
+		effects.play("hurtBlink")
+		await get_tree().create_timer(0.2).timeout
+		effects.play("RESET")
+		death()
+	else:
+		poison_timer.stop()
