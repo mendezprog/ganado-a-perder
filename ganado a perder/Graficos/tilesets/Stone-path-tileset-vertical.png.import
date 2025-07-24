@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkiqfkq6o65ut"
-path="res://.godot/imported/Stone-path-tileset-vertical.png-f03ead78733e0a459bdeef6505ffb729.ctex"
+path="res://.godot/imported/Stone-path-tileset-vertical.png-189475840fc9409bdefcf5bd8f0eac1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stone-path-tileset-vertical.png"
-dest_files=["res://.godot/imported/Stone-path-tileset-vertical.png-f03ead78733e0a459bdeef6505ffb729.ctex"]
+source_file="res://Graficos/tilesets/Stone-path-tileset-vertical.png"
+dest_files=["res://.godot/imported/Stone-path-tileset-vertical.png-189475840fc9409bdefcf5bd8f0eac1c.ctex"]
 
 [params]
 

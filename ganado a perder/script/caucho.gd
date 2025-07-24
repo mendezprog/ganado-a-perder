@@ -9,6 +9,9 @@ class_name caucho extends CharacterBody2D
 @onready var caucho_sprite: AnimatedSprite2D = $CauchoSprite
 @onready var caucho_area: Area2D = $cauchoArea
 
+var enemigos_en_area: Array[Node2D] = []
+var tiempo_entre_ataques := 1.0
+
 var damage := 0.5
 var can_attack := true
 
@@ -72,6 +75,12 @@ func attackEnemy(delta):
 	velocity = velocity.lerp(desired_velocity, delta * smoothing)
 
 	move_and_slide()
+	
+	if can_attack and global_position.distance_to(current_target.global_position) < 20:
+		if current_target.has_method("take_damage"):
+			current_target.take_damage(damage)
+			can_attack = false
+			start_attack_cooldown()
 
 func get_closest_enemy() -> Node2D:
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -97,3 +106,11 @@ func cauchoEntered():
 func start_attack_cooldown():
 	await get_tree().create_timer(1.0).timeout
 	can_attack = true
+
+
+func _on_caucho_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_caucho_area_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.

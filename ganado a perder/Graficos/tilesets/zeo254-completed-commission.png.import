@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clhqxhdo2dhc3"
-path="res://.godot/imported/zeo254-completed-commission.png-142b2c5529a7b04d122f53be265247d9.ctex"
+path="res://.godot/imported/zeo254-completed-commission.png-1b7235b67670053ac8b59df46914e896.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zeo254-completed-commission.png"
-dest_files=["res://.godot/imported/zeo254-completed-commission.png-142b2c5529a7b04d122f53be265247d9.ctex"]
+source_file="res://Graficos/tilesets/zeo254-completed-commission.png"
+dest_files=["res://.godot/imported/zeo254-completed-commission.png-1b7235b67670053ac8b59df46914e896.ctex"]
 
 [params]
 

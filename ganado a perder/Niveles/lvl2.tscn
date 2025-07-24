@@ -1116,7 +1116,7 @@ offset_bottom = 54.0
 texture_under = ExtResource("9_kui1w")
 texture_progress = ExtResource("10_yd8gj")
 script = ExtResource("11_b87i1")
-player = NodePath("../../Martin")
+player = NodePath("../../martin")
 
 [node name="orderIcon" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 1
@@ -1130,10 +1130,10 @@ script = SubResource("GDScript_8hy5l")
 
 [node name="weaponHotBar" parent="CanvasLayer" instance=ExtResource("14_xt4yg")]
 
-[node name="Martin" parent="." instance=ExtResource("6_1g28f")]
+[node name="martin" parent="." instance=ExtResource("6_1g28f")]
 position = Vector2(141, 63)
 
-[node name="followCam" type="Camera2D" parent="Martin" node_paths=PackedStringArray("background")]
+[node name="followCam" type="Camera2D" parent="martin" node_paths=PackedStringArray("background")]
 position = Vector2(7.14276, 18.5714)
 zoom = Vector2(2, 2)
 position_smoothing_speed = 1.0

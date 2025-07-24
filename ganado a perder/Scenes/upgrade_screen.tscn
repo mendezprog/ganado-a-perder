@@ -178,10 +178,10 @@ text = "..."
 fit_content = true
 
 [node name="Confirmar" type="Button" parent="MejorasMenu"]
-offset_left = -444.0
-offset_top = 119.0
-offset_right = -178.0
-offset_bottom = 197.0
+offset_left = -451.0
+offset_top = 147.0
+offset_right = -185.0
+offset_bottom = 225.0
 theme_override_colors/font_outline_color = Color(0.17, 0.0736667, 0, 1)
 theme_override_colors/font_color = Color(1, 0.7, 0, 1)
 theme_override_constants/outline_size = 10
@@ -193,10 +193,10 @@ flat = true
 icon_alignment = 1
 
 [node name="SiguienteNivel" type="Button" parent="MejorasMenu"]
-offset_left = 184.0
-offset_top = 119.0
-offset_right = 450.0
-offset_bottom = 197.0
+offset_left = 177.0
+offset_top = 147.0
+offset_right = 443.0
+offset_bottom = 225.0
 theme_override_colors/font_outline_color = Color(0.17, 0.0736667, 0, 1)
 theme_override_colors/font_color = Color(1, 0.7, 0, 1)
 theme_override_constants/outline_size = 10

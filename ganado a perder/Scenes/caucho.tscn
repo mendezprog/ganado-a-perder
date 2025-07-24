@@ -100,3 +100,6 @@ animation = &"caucho-idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xvssp")
+
+[connection signal="body_entered" from="cauchoArea" to="." method="_on_caucho_area_body_entered"]
+[connection signal="body_exited" from="cauchoArea" to="." method="_on_caucho_area_body_exited"]

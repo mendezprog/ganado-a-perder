@@ -57,7 +57,7 @@ offset_right = 543.0
 offset_bottom = 176.0
 theme_override_fonts/normal_font = ExtResource("4_iy4n7")
 theme_override_font_sizes/normal_font_size = 29
-text = "Martín Cobre y su perro Caucho fueron a una subasta de reses para ver si conseguían comprar algunas para el rancho. Pero no sabían que le ganarón al Coronel Moreno, un hombre envidioso que decide, ayudado por su ejercito, dedicarse a cazar a Martín para robar sus vacas. Ahora nuestro protagonista debe abrirse paso a lo largo de La Pampa para llegar a su rancho.
+text = "Martín Cobre y su perro Caucho fueron a una subasta de reses para ver si conseguían comprar algunas para el rancho. Pero no sabían que le ganaron al Coronel Moreno, un hombre envidioso que decide, ayudado por su ejercito, dedicarse a cazar a Martín para robar sus vacas. Ahora nuestro protagonista debe abrirse paso a lo largo de La Pampa para llegar a su rancho.
 
 Presiona Enter para Comenzar"
 fit_content = true

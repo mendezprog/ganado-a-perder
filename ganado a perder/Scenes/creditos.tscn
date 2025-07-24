@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcsabuhsmom0h"]
+[gd_scene load_steps=15 format=3 uid="uid://dcsabuhsmom0h"]
 
 [ext_resource type="Script" uid="uid://bykk2kweywwuf" path="res://script/creditos.gd" id="1_lpe7s"]
-[ext_resource type="Texture2D" uid="uid://cgaibskjvpbtt" path="res://Graficos/HUD/menuPausa/creditos.png" id="1_ompal"]
+[ext_resource type="VideoStream" uid="uid://b6mtjs5g2peil" path="res://Graficos/creditos.ogv" id="3_qi66g"]
 [ext_resource type="FontFile" uid="uid://bopct1e2hqu30" path="res://fonts/Tiny5/Tiny5-Regular.ttf" id="3_yyntd"]
 [ext_resource type="Texture2D" uid="uid://r131pdpqjdjh" path="res://Graficos/martin/MartinCaucho.png" id="4_lpe7s"]
+[ext_resource type="AudioStream" uid="uid://bg72e3drghh4m" path="res://SFX/Dopamina - Inaban.mp3" id="5_yyntd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyntd"]
 atlas = ExtResource("4_lpe7s")
@@ -78,30 +79,36 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_top = 56.0
-offset_right = 1077.0
-offset_bottom = 661.0
-texture = ExtResource("1_ompal")
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control"]
+offset_right = 1280.0
+offset_bottom = 720.0
+stream = ExtResource("3_qi66g")
+autoplay = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 500.0
-offset_right = 541.0
-offset_bottom = 596.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
+offset_left = 977.0
+offset_top = 623.0
+offset_right = 1266.0
+offset_bottom = 700.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_fonts/normal_font = ExtResource("3_yyntd")
-theme_override_font_sizes/normal_font_size = 37
+theme_override_font_sizes/normal_font_size = 28
 text = "Presiona esc para volver al menu principal"
 fit_content = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(540, 360)
-zoom = Vector2(1, 1.2)
+position = Vector2(639, 355)
+zoom = Vector2(0.85, 1.02)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(422, 575)
+position = Vector2(86, 622)
 scale = Vector2(2.21875, 2.21875)
 sprite_frames = SubResource("SpriteFrames_137jf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_yyntd")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="finished" from="Control/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

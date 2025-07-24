@@ -341,6 +341,8 @@ func _on_martin_hitbox_area_entered(area: Area2D) -> void:
 			poisoned = true
 			poison_timer.start()
 		hurtByEnemy(area)
+	if area.get_parent() != null and area.get_parent().name == "moreno":
+		moreno_damage()
 	if area.has_method("bulletEnteredMartin"):
 		area.bulletEnteredMartin()
 		hurtByEnemy(area)
@@ -351,8 +353,13 @@ func death():
 		poison_timer.stop()
 		dead = true
 		health = 10
-		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+		GlobalStats.trabuco_max_ammo = 25
+		GlobalStats.trabuco_reload_time = 2.0
+		GlobalStats.facon_damage = 1
+		GlobalStats.martin_max_health = 10
+		GlobalStats.caucho_damage = 0.5
 		GlobalStats.current_level = 0
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func tomarMate():
 	if health == 10 or mates <= 0:
@@ -419,3 +426,13 @@ func _on_poison_timer_timeout() -> void:
 		death()
 	else:
 		poison_timer.stop()
+
+func moreno_damage():
+	hurtState = true
+	health -= 5
+	healthChanged.emit()
+	effects.play("hurtBlink")
+	await get_tree().create_timer(0.5).timeout
+	effects.play("RESET")
+	hurtState = false
+	death()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://chwqxvrxe2by8"]
+[gd_scene load_steps=32 format=4 uid="uid://chwqxvrxe2by8"]
 
 [ext_resource type="Texture2D" uid="uid://b7r4r5s0v55rf" path="res://Tiles/InteriorTilesLITE.png" id="1_v2k1k"]
 [ext_resource type="Texture2D" uid="uid://cclg363x8wnq0" path="res://Tiles/libassetpack-tiled.png" id="2_bcsrx"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dg87t82q2ikyp" path="res://Graficos/HUD/HealthBar/barravidavacia.png" id="8_xiaor"]
 [ext_resource type="Texture2D" uid="uid://dvp7tq6xx6noq" path="res://Graficos/HUD/HealthBar/barravidallena.png" id="9_lnn84"]
 [ext_resource type="Script" uid="uid://dbmwyi6k2ckwg" path="res://script/player_health.gd" id="10_brmqa"]
+[ext_resource type="PackedScene" uid="uid://c8njircj10ow5" path="res://Scenes/weapon_hot_bar.tscn" id="17_xiaor"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1qt7d"]
 texture = ExtResource("1_v2k1k")
@@ -2611,10 +2612,10 @@ tile_set = SubResource("TileSet_wvkly")
 tile_map_data = PackedByteArray("AAAAAAcAAAAcAAQAAGAAAAYAAAAdAAQAAGAAAAUAAAAeAAQAAGAAAAQAAAAeAAQAAGABAAcAAAAcAAUAAGABAAYAAAAdAAUAAGABAAUAAAAeAAUAAGABAAQAAAAeAAUAAGAAAAgAAAAbAAQAAGABAAgAAAAbAAUAAGAjAAIAAgAAAAAAAAAjAAMAAgABAAEAAAAjAAQAAgABAAIAAAAkAAMAAgABAAEAAAAkAAQAAgABAAIAAAAlAAIAAgACAAAAAAAlAAMAAgACAAEAAAAlAAQAAgACAAIAAAAiAAMAAgABAAEAAAAiAAQAAgABAAIAAAAhAAMAAgAAAAEAAAAhAAQAAgAAAAIAAAAOAAIABAAAAAEAAAAOAAMABAAAAAIAAAAPAAEABAABAAAAAAAPAAIABAABAAEAAAAPAAMABAABAAIAAAAQAAIABAACAAEAAAAQAAMABAACAAIAAAAGAP7/BQAAAAAAAAAGAP//BQAAAAEAAAAHAP7/BQABAAAAAAAHAP//BQABAAEAAAAHAAAABQABAAIAAAAIAP7/BQACAAAAAAAIAP//BQACAAEAAAASAP7/BQAAAAAAAAASAP//BQAAAAEAAAATAP7/BQABAAAAAAATAP//BQABAAEAAAATAAAABQABAAIAAAAUAP7/BQACAAAAAAAUAP//BQACAAEAAAAeAP7/BQAAAAAAAAAeAP//BQAAAAEAAAAfAP7/BQABAAAAAAAfAP//BQABAAEAAAAfAAAABQABAAIAAAAgAP7/BQACAAAAAAAgAP//BQACAAEAAAAZAAIABAAAAAEAAAAZAAMABAAAAAIAAAAaAAEABAABAAAAAAAaAAIABAABAAEAAAAaAAMABAABAAIAAAAbAAIABAACAAEAAAAbAAMABAACAAIAAAAWAAcAAAAaAA4AAAAWAAgAAAAaAA8AAAAXAAcAAAAbAA4AAAAXAAgAAAAbAA8AAAAYAAcAAwAAAAAAAAAYAAgAAwAAAAEAAAAZAAcAAwABAAAAAAAaAAcAAwABAAAAAAAbAAcAAwABAAAAAAAcAAcAAwACAAAAAAAcAAgAAwACAAEAAAAYAAkAAwAAAAIAAAAZAAgAAwABAAEAAAAaAAgAAwABAAEAAAAbAAgAAwABAAEAAAAcAAkAAwACAAIAAAAdAAcAAAAaAAwAAAAdAAgAAAAaAA0AAAAeAAcAAAAbAAwAAAAeAAgAAAAbAA0AAAA=")
 tile_set = SubResource("TileSet_x8gkf")
 
-[node name="Martin" parent="." instance=ExtResource("3_mvudi")]
+[node name="martin" parent="." instance=ExtResource("3_mvudi")]
 position = Vector2(153, 102)
 
-[node name="followCam" type="Camera2D" parent="Martin" node_paths=PackedStringArray("background")]
+[node name="followCam" type="Camera2D" parent="martin" node_paths=PackedStringArray("background")]
 position = Vector2(2.85705, -21.4286)
 zoom = Vector2(3.5, 3.5)
 position_smoothing_speed = 1.0
@@ -2662,4 +2663,6 @@ offset_bottom = 54.0
 texture_under = ExtResource("8_xiaor")
 texture_progress = ExtResource("9_lnn84")
 script = ExtResource("10_brmqa")
-player = NodePath("../../Martin")
+player = NodePath("../../martin")
+
+[node name="weaponHotBar" parent="CanvasLayer" instance=ExtResource("17_xiaor")]

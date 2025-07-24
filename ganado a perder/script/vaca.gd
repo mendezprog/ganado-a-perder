@@ -49,9 +49,9 @@ func anims():
 		vaca_sprite.flip_h = true
 
 func _on_area_martin_o_caucho_body_entered(body: Node2D) -> void:
-	if body.name == "Martin" or body.name == "caucho":
+	if body.name == "martin" or body.name == "caucho":
 		on_duty = true
-	if body.name == "Martin" and body.name == "caucho":
+	if body.name == "martin" and body.name == "caucho":
 		on_duty = true
 		path_speed = 45
 	elif body.name == "caucho":
@@ -61,12 +61,12 @@ func _on_area_martin_o_caucho_body_entered(body: Node2D) -> void:
 		path_speed = 30
 
 func _on_area_martin_o_caucho_body_exited(body: Node2D) -> void:
-	if body.name == "Martin" or body.name == "caucho":
+	if body.name == "martin" or body.name == "caucho":
 		# Verificamos si todavía hay uno adentro
 		var overlapping: Array[Node2D] = $AreaMartinOCaucho.get_overlapping_bodies()
 		on_duty = false
 		for b in overlapping:
-			if b.name == "Martin":
+			if b.name == "martin":
 				on_duty = true
 				path_speed = 30
 			elif b.name == "caucho":

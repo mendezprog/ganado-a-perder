@@ -849,10 +849,10 @@ shape = SubResource("RectangleShape2D_hktea")
 position = Vector2(945, 266.125)
 shape = SubResource("RectangleShape2D_nselx")
 
-[node name="Martin" parent="." instance=ExtResource("3_vrqwe")]
+[node name="martin" parent="." instance=ExtResource("3_vrqwe")]
 position = Vector2(722, 19)
 
-[node name="followCam" type="Camera2D" parent="Martin" node_paths=PackedStringArray("background")]
+[node name="followCam" type="Camera2D" parent="martin" node_paths=PackedStringArray("background")]
 position = Vector2(7.14276, 18.5714)
 zoom = Vector2(2, 2)
 position_smoothing_speed = 1.0
@@ -907,7 +907,7 @@ offset_bottom = 54.0
 texture_under = ExtResource("8_x2u4t")
 texture_progress = ExtResource("9_g30dt")
 script = ExtResource("8_8n7to")
-player = NodePath("../../Martin")
+player = NodePath("../../martin")
 
 [node name="orderIcon" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 1

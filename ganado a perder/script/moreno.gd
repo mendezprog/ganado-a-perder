@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 var speed = 50
-var charge_speed = 300
-var charge_duration = 0.1
+var charge_speed = 350
+var charge_duration = 0.2
 var dead = false
-var health = 50
-var damage = 1
+var health = 75
+var damage = 5
 var player: Node2D
 var is_stunned := false
 var is_charging := false
@@ -44,7 +44,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		area.bulletEntered()
 		take_damage(1)
 	elif area.has_method("meleeEntered"):
-		take_damage(1)
+		take_damage(GlobalStats.facon_damage)
 	elif area.has_method("boleadoraEntered"):
 		area.boleadoraEntered()
 		stun()
@@ -52,8 +52,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		area.get_parent().cauchoEntered()
 		take_damage(0.5)
 	elif area.is_in_group("Player"):
-		if area.has_method("take_damage"):
-			area.take_damage(damage)
+		if area.has_method("moreno_damage"):
+			area.moreno_damage()
 
 func take_damage(amount: float) -> void:
 	health -= amount
